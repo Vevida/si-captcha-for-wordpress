@@ -60,7 +60,6 @@ if (!class_exists('siCaptcha')) {
             $default_position = ( function_exists('bp_loaded') ) ? 'label-required-input' : 'input-label-required';
 
             $si_captcha_option_defaults = array(
-                'si_captcha_donated' => 'false',
                 'si_captcha_perm' => 'true',
                 'si_captcha_perm_level' => 'read',
                 'si_captcha_comment' => 'true',

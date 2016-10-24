@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
     <div id="message" class="updated"><p><strong><?php _e('Options saved.', 'si-captcha') ?></strong></p></div>
 <?php endif; ?>
 <div class="wrap">
-    <h2><?php _e('SI Captcha Options', 'si-captcha') ?></h2>
+    <h2 class="title"><?php _e('SI Captcha Options', 'si-captcha') ?></h2>
 
     <script type="text/javascript">
         function toggleVisibility(id) {
@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
     else if ($wpmu == 1)
         echo admin_url('wpmu-admin.php?page=si-captcha.php');
     else
-        echo admin_url('plugins.php?page=si-captcha-for-wordpress/si-captcha.php');
+        echo admin_url('options-general.php?page=si-captcha-for-wordpress/si-captcha.php');
     ?>" method="post">
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="form_type" value="upload_options" />
@@ -136,12 +136,6 @@ if (isset($_POST['submit'])) {
             <?php
         }
         ?>
-
-        <h3><?php _e('Options', 'si-captcha') ?></h3>
-
-        <p class="submit">
-            <input type="submit" name="submit" value="<?php _e('Update Options', 'si-captcha') ?> &raquo;" />
-        </p>
 
         <fieldset class="options">
 
@@ -472,7 +466,7 @@ echo ' '; ?>
         </fieldset>
 
         <p class="submit">
-            <input type="submit" name="submit" value="<?php _e('Update Options', 'si-captcha') ?> &raquo;" />
+            <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Update Options', 'si-captcha'); ?>">
         </p>
 
     </form>
