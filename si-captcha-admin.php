@@ -30,7 +30,6 @@ if (isset($_POST['submit'])) {
         'si_captcha_register' => (isset($_POST['si_captcha_register']) ) ? 'true' : 'false',
         'si_captcha_lostpwd' => (isset($_POST['si_captcha_lostpwd']) ) ? 'true' : 'false',
         'si_captcha_rearrange' => (isset($_POST['si_captcha_rearrange']) ) ? 'true' : 'false',
-        'si_captcha_enable_session' => (isset($_POST['si_captcha_enable_session']) ) ? 'true' : 'false',
         'si_captcha_captcha_small' => (isset($_POST['si_captcha_captcha_small']) ) ? 'true' : 'false',
         'si_captcha_honeypot_enable' => (isset($_POST['si_captcha_honeypot_enable']) ) ? 'true' : 'false',
         'si_captcha_aria_required' => (isset($_POST['si_captcha_aria_required']) ) ? 'true' : 'false',
@@ -217,44 +216,6 @@ _e('Enable this setting and javascript will relocate the button.', 'si-captcha')
 <?php _e('Makes the CAPTCHA image smaller.', 'si-captcha'); ?>
                         </div>
                         <br />
-
-                        <input name="si_captcha_enable_session" id="si_captcha_enable_session" type="checkbox" <?php if ($si_captcha_opt['si_captcha_enable_session'] == 'true') echo ' checked="checked" '; ?> />
-                        <label for="si_captcha_enable_session"><?php _e('Enable PHP sessions.', 'si-captcha'); ?></label>
-                        <a style="cursor:pointer;" title="<?php esc_attr_e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_session_tip');"><?php _e('help', 'si-captcha'); ?></a>
-                        <div style="text-align:left; display:none" id="si_captcha_enable_session_tip">
-                        <?php _e('Enables PHP session handling. Only enable this if you have CAPTCHA token errors. Enable this setting to use PHP sessions for the CAPTCHA. PHP Sessions must be supported by your web host or there may be session errors.', 'si-captcha'); ?>
-                        </div>
-                        <br />
-
-                        <?php
-                        if ($si_captcha_opt['si_captcha_enable_session'] != 'true') {
-                            $check_this_dir = untrailingslashit($si_captcha_dir_ns);
-                            if (is_writable($check_this_dir)) {
-                                //echo '<span style="color: green">OK - Writable</span> ' . substr(sprintf('%o', fileperms($check_this_dir)), -4);
-                            } else if (!file_exists($check_this_dir)) {
-                                echo '<span style="color: red;">';
-                                echo __('There is a problem with the directory', 'si-captcha');
-                                echo ' /captcha/cache/. ';
-                                echo __('The directory is not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.', 'si-captcha');
-                                echo ' ';
-                                echo __('Fixing the actual problem is recommended, but you can check this setting on the SI CAPTCHA options page: "Use PHP sessions" and the captcha will work (if PHP sessions are supported by your web host).', 'si-captcha');
-                                echo '</span><br />';
-                            } else {
-                                echo '<span style="color: red;">';
-                                echo __('There is a problem with the directory', 'si-captcha') . ' /captcha/cache/. ';
-                                echo __('The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha') . '. ';
-                                echo __('Permissions are: ', 'si-captcha');
-                                echo ' ';
-                                echo substr(sprintf('%o', fileperms($check_this_dir)), -4);
-                                echo ' ';
-                                echo __('Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)', 'si-captcha');
-                                echo ' ';
-                                echo __('Fixing the actual problem is recommended, but you can check this setting on the SI CAPTCHA options page: "Use PHP sessions" and the captcha will work (if PHP sessions are supported by your web host).', 'si-captcha');
-                                echo '</span><br />';
-                            }
-                        }
-                        ?>
-
 
                         <input name="si_captcha_honeypot_enable" id="si_captcha_honeypot_enable" type="checkbox" <?php if ($si_captcha_opt['si_captcha_honeypot_enable'] == 'true') echo ' checked="checked" '; ?> />
                         <label for="si_captcha_honeypot_enable"><?php _e('Enable honeypot spambot trap.', 'si-captcha'); ?></label>

@@ -2,7 +2,7 @@
 /*
   Plugin Name: SI CAPTCHA Anti-Spam
   Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
-  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
+  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a>
   Version: 2.7.7.8
   Author: Mike Challis
   Author URI: http://www.642weather.com/weather/scripts.php
@@ -68,7 +68,6 @@ if (!class_exists('siCaptcha')) {
                 'si_captcha_register' => 'true',
                 'si_captcha_lostpwd' => 'true',
                 'si_captcha_rearrange' => 'true',
-                'si_captcha_enable_session' => 'false',
                 'si_captcha_captcha_small' => 'false',
                 'si_captcha_honeypot_enable' => 'false',
                 'si_captcha_aria_required' => 'false',
@@ -799,71 +798,44 @@ EOT;
             if (isset($_POST['captcha_code']) && empty($_POST['captcha_code']))
                 return ($si_captcha_opt['si_captcha_error_empty'] != '') ? $si_captcha_opt['si_captcha_error_empty'] : __('Empty CAPTCHA', 'si-captcha');
 
-            if ($si_captcha_opt['si_captcha_enable_session'] != 'true') {
-                //captcha without sessions
-                if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
-                    return ($si_captcha_opt['si_captcha_error_empty'] != '') ? $si_captcha_opt['si_captcha_error_empty'] : __('Empty CAPTCHA', 'si-captcha');
-                } else if (!isset($_POST["si_code_$form_id"]) || empty($_POST["si_code_$form_id"])) {
-                    return ($si_captcha_opt['si_captcha_error_token'] != '') ? $si_captcha_opt['si_captcha_error_token'] : __('Missing CAPTCHA token', 'si-captcha');
-                } else {
-                    $prefix = 'xxxxxx';
-                    if (isset($_POST["si_code_$form_id"]) && is_string($_POST["si_code_$form_id"]) && preg_match('/^[a-zA-Z0-9]{15,17}$/', $_POST["si_code_$form_id"])) {
-                        $prefix = $_POST["si_code_$form_id"];
-                    }
-                    if (is_readable($si_captcha_dir_ns . $prefix . '.php')) {
-                        include( $si_captcha_dir_ns . $prefix . '.php' );
-                        if (0 == strcasecmp(trim(strip_tags($_POST['captcha_code'])), $captcha_word)) {
-                            // captcha was matched
-                            if ($unlink == 'unlink')
-                                @unlink($si_captcha_dir_ns . $prefix . '.php');
-                            // empty field honyepot trap for spam bots
-                            $hp_check = $this->si_captcha_check_honeypot("$form_id");
-                            if ($hp_check != 'ok')
-                                return ($si_captcha_opt['si_captcha_error_spambot'] != '') ? $si_captcha_opt['si_captcha_error_spambot'] : __('Possible spam bot', 'si-captcha');
-                            return 'valid';
-                        } else {
-                            return ($si_captcha_opt['si_captcha_error_incorrect'] != '') ? $si_captcha_opt['si_captcha_error_incorrect'] : __('Wrong CAPTCHA', 'si-captcha');
-                        }
-                    } else {
-                        return ($si_captcha_opt['si_captcha_error_unreadable'] != '') ? $si_captcha_opt['si_captcha_error_unreadable'] : __('Unreadable CAPTCHA token file', 'si-captcha');
-                        //$this->si_captcha_token_error();
-                    }
-                }
+            
+            //captcha without sessions
+            if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+                return ($si_captcha_opt['si_captcha_error_empty'] != '') ? $si_captcha_opt['si_captcha_error_empty'] : __('Empty CAPTCHA', 'si-captcha');
+            } else if (!isset($_POST["si_code_$form_id"]) || empty($_POST["si_code_$form_id"])) {
+                return ($si_captcha_opt['si_captcha_error_token'] != '') ? $si_captcha_opt['si_captcha_error_token'] : __('Missing CAPTCHA token', 'si-captcha');
             } else {
-                //captcha with PHP sessions
-                if (!isset($_SESSION["securimage_code_si_$form_id"]) || empty($_SESSION["securimage_code_si_$form_id"])) {
-                    return ($si_captcha_opt['si_captcha_error_cookie'] != '') ? $si_captcha_opt['si_captcha_error_cookie'] : __('Unreadable CAPTCHA cookie', 'si-captcha');
-                } else {
-
-                    $captcha_code = trim(strip_tags($_POST['captcha_code']));
-
-                    require_once "$si_captcha_dir/securimage.php";
-                    $img = new Securimage_Captcha_si();
-                    $img->form_id = $form_id; // makes compatible with multi-forms on same page
-                    $valid = $img->check("$captcha_code");
-                    // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
-                    if ($valid == true) {
+                $prefix = 'xxxxxx';
+                if (isset($_POST["si_code_$form_id"]) && is_string($_POST["si_code_$form_id"]) && preg_match('/^[a-zA-Z0-9]{15,17}$/', $_POST["si_code_$form_id"])) {
+                    $prefix = $_POST["si_code_$form_id"];
+                }
+                if (is_readable($si_captcha_dir_ns . $prefix . '.php')) {
+                    include( $si_captcha_dir_ns . $prefix . '.php' );
+                    if (0 == strcasecmp(trim(strip_tags($_POST['captcha_code'])), $captcha_word)) {
+                        // captcha was matched
+                        if ($unlink == 'unlink')
+                            @unlink($si_captcha_dir_ns . $prefix . '.php');
                         // empty field honyepot trap for spam bots
                         $hp_check = $this->si_captcha_check_honeypot("$form_id");
                         if ($hp_check != 'ok')
                             return ($si_captcha_opt['si_captcha_error_spambot'] != '') ? $si_captcha_opt['si_captcha_error_spambot'] : __('Possible spam bot', 'si-captcha');
-                        // ok can continue
                         return 'valid';
                     } else {
                         return ($si_captcha_opt['si_captcha_error_incorrect'] != '') ? $si_captcha_opt['si_captcha_error_incorrect'] : __('Wrong CAPTCHA', 'si-captcha');
                     }
+                } else {
+                    return ($si_captcha_opt['si_captcha_error_unreadable'] != '') ? $si_captcha_opt['si_captcha_error_unreadable'] : __('Unreadable CAPTCHA token file', 'si-captcha');
+                    //$this->si_captcha_token_error();
                 }
             }
+             
+            
         }
 
 // end function si_captcha_validate_code
 // displays the CAPTCHA in the forms
         function si_captcha_captcha_html($label = 'si_image', $form_id = 'com', $no_echo = false) {
             global $si_captcha_url, $si_captcha_dir, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt;
-
-            $capt_disable_sess = 0;
-            if ($si_captcha_opt['si_captcha_enable_session'] != 'true')
-                $capt_disable_sess = 1;
 
             // url for no session captcha image
             $securimage_show_url = $si_captcha_url . '/securimage_show.php?';
@@ -878,20 +850,19 @@ EOT;
 
             $securimage_show_url .= 'si_form_id=' . $form_id;
 
-            if ($capt_disable_sess) {
-                // clean out old captcha no session temp files
-                $this->si_captcha_clean_temp_dir($si_captcha_dir_ns, 30);
-                // pick new prefix token
-                $prefix_length = 16;
-                $prefix_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-                $prefix = '';
-                $prefix_count = strlen($prefix_characters);
-                while ($prefix_length--) {
-                    $prefix .= $prefix_characters[mt_rand(0, $prefix_count - 1)];
-                }
-                $securimage_show_rf_url = $securimage_show_url . '&amp;prefix=';
-                $securimage_show_url .= '&amp;prefix=' . $prefix;
+            // clean out old captcha no session temp files
+            $this->si_captcha_clean_temp_dir($si_captcha_dir_ns, 30);
+            // pick new prefix token
+            $prefix_length = 16;
+            $prefix_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+            $prefix = '';
+            $prefix_count = strlen($prefix_characters);
+            while ($prefix_length--) {
+                $prefix .= $prefix_characters[mt_rand(0, $prefix_count - 1)];
             }
+            $securimage_show_rf_url = $securimage_show_url . '&amp;prefix=';
+            $securimage_show_url .= '&amp;prefix=' . $prefix;
+           
 
             $si_html = '';
 
@@ -910,18 +881,13 @@ EOT;
             $si_html .= '" title="';
             $si_html .= ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']) : esc_attr(__('CAPTCHA', 'si-captcha'));
             $si_html .= '" />' . "\n";
-            if ($capt_disable_sess) {
-                $si_html .= '    <input id="si_code_' . $form_id . '" name="si_code_' . $form_id . '" type="hidden"  value="' . $prefix . '" />' . "\n";
-            }
+            $si_html .= '    <input id="si_code_' . $form_id . '" name="si_code_' . $form_id . '" type="hidden"  value="' . $prefix . '" />' . "\n";
+            
 
             $si_html .= '    <div id="si_refresh_' . $form_id . '">' . "\n";
             $si_html .= '<a href="#" rel="nofollow" title="';
             $si_html .= ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']) : esc_attr(__('Refresh', 'si-captcha'));
-            if ($capt_disable_sess) {
-                $si_html .= '" onclick="si_captcha_refresh(\'' . $label . '\',\'' . $form_id . '\',\'' . $securimage_url . '\',\'' . $securimage_show_rf_url . '\'); return false;">' . "\n";
-            } else {
-                $si_html .= '" onclick="document.getElementById(\'' . $label . '\').src = \'' . $securimage_show_url . '&amp;sid=\'' . ' + Math.random(); return false;">' . "\n";
-            }
+            $si_html .= '" onclick="si_captcha_refresh(\'' . $label . '\',\'' . $form_id . '\',\'' . $securimage_url . '\',\'' . $securimage_show_rf_url . '\'); return false;">' . "\n";
             $si_html .= '      <img class="captchaImgRefresh" src="' . $si_captcha_url . '/images/refresh.png" width="22" height="20" alt="';
             $si_html .= ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']) : esc_attr(__('Refresh', 'si-captcha'));
             $si_html .= '" onclick="this.blur();" /></a>
@@ -1158,15 +1124,8 @@ if (isset($si_image_captcha)) {
     // get the options now
     $si_image_captcha->si_captcha_get_options();
 
-    if (isset($si_captcha_opt['si_captcha_enable_session']) && $si_captcha_opt['si_captcha_enable_session'] != 'true') {
-        // add javascript (conditionally to footer)
-        // http://scribu.net/wordpress/optimal-script-loading.html
-        add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_script'));
-    } else {
-        // start the PHP session
-        // buddypress had session error on member and groups pages, so start session here instead of init
-        add_action('plugins_loaded', array(&$si_image_captcha, 'si_captcha_start_session'));
-    }
+    add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_script'));
+    
 
     // si captcha admin options
     add_action('admin_menu', array(&$si_image_captcha, 'si_captcha_add_tabs'), 1);
