@@ -22,7 +22,6 @@ if (isset($_POST['submit'])) {
     check_admin_referer('si-captcha-options_update'); // nonce
     // post changes to the options array
     $optionarray_update = array(
-        'si_captcha_donated' => (isset($_POST['si_captcha_donated']) ) ? 'true' : 'false', // true or false
         'si_captcha_perm' => (isset($_POST['si_captcha_perm']) ) ? 'true' : 'false',
         'si_captcha_perm_level' => (trim($_POST['si_captcha_perm_level']) != '' ) ? strip_tags(trim($_POST['si_captcha_perm_level'])) : $si_captcha_option_defaults['si_captcha_perm_level'], // use default if empty
         'si_captcha_comment' => (isset($_POST['si_captcha_comment']) ) ? 'true' : 'false',
@@ -108,75 +107,6 @@ if (isset($_POST['submit'])) {
         }
     </script>
 
-	<?php
-    $si_captcha_update = '';
-    if (isset($api->version)) {
-        if (version_compare($api->version, $si_captcha_version, '>')) {
-            $si_captcha_update = ', <a href="' . admin_url('plugins.php') . '">' . sprintf(__('a newer version is available: %s', 'si-captcha'), $api->version) . '</a>';
-            echo '<div id="message" class="updated">';
-            echo '<a href="' . admin_url('plugins.php') . '">' . sprintf(__('A newer version of SI Captcha Anti-Spam is available: %s', 'si-captcha'), $api->version) . '</a>';
-            echo "</div>\n";
-        } else {
-            $si_captcha_update = ' ' . __('(latest version)', 'si-captcha');
-        }
-    }
-    ?>
-
-    <p>
-        <?php echo __('Version:', 'si-captcha') . ' ' . $si_captcha_version . $si_captcha_update; ?> |
-        <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/changelog/" target="_blank"><?php echo __('Changelog', 'si-captcha'); ?></a> |
-        <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo __('FAQ', 'si-captcha'); ?></a> |
-        <a href="http://wordpress.org/support/view/plugin-reviews/si-captcha-for-wordpress" target="_blank"><?php echo __('Rate This', 'si-captcha'); ?></a> |
-        <a href="http://wordpress.org/support/plugin/si-captcha-for-wordpress" target="_blank"><?php echo __('Support', 'si-captcha'); ?></a> |
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
-        <a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo __('Free PHP Scripts', 'si-captcha'); ?></a>
-    </p>
-
-
-    <?php
-    if ($si_captcha_opt['si_captcha_donated'] != 'true') {
-        ?>
-
-        <table style="border:none; width:850px;">
-            <tr>
-                <td>
-                    <div style="width:385px;height:200px; float:left;background-color:white;padding: 10px 10px 10px 10px; border: 1px solid #ddd; background-color:#FFFFE0;">
-                        <div>
-                            <h3><?php echo __('Donate', 'si-captcha'); ?></h3>
-
-                            <?php
-                            _e('Please donate to keep this plugin FREE', 'si-captcha');
-                            echo '<br />';
-                            _e('If you find this plugin useful to you, please consider making a small donation to help contribute to my time invested and to further development. Thanks for your kind support!', 'si-captcha')
-                            ?> - <a style="cursor:pointer;" title="<?php esc_attr_e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a>
-                            <br /><br />
-                        </div>
-                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                            <input type="hidden" name="cmd" value="_s-xclick" />
-                            <input type="hidden" name="hosted_button_id" value="KXJWLPPWZG83S" />
-                            <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" style="border:none;" name="submit" alt="Paypal Donate" />
-                            <img alt="" style="border:none;" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-                        </form>
-                </td>
-            </tr>
-        </table>
-
-        <br />
-
-        <div class="fscf_tip" id="si_captcha_mike_challis_tip">
-            <img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/si-captcha.jpg" class="fscf_left fscf_img" width="250" height="185" alt="Mike Challis" /><br />
-            <?php _e('Mike Challis says: "Hello, I have spend hundreds of hours coding this plugin just for you. Please consider making a small donation. If you are not able to, that is OK.', 'si-captcha'); ?>
-    <?php echo ' ';
-    _e('Suggested donation: $25, $20, $15, $10, $5, $3. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also rate my plugin."', 'si-captcha'); ?>
-            <a href="http://wordpress.org/support/view/plugin-reviews/si-captcha-for-wordpress" target="_blank"><?php _e('Rate This', 'si-captcha'); ?></a>.
-            <br /><br />
-            <a style="cursor:pointer;" title="Close" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('Close this message', 'si-captcha'); ?></a>
-            <div class="clear"></div><br />
-        </div>
-
-        <?php
-    }
-    ?>
 
     <form name="formoptions" action="<?php
     global $wp_version;
@@ -193,9 +123,6 @@ if (isset($_POST['submit'])) {
         <input type="hidden" name="form_type" value="upload_options" />
 <?php wp_nonce_field('si-captcha-options_update'); ?>
 
-        <input name="si_captcha_donated" id="si_captcha_donated" type="checkbox" <?php if ($si_captcha_opt['si_captcha_donated'] == 'true') echo 'checked="checked"'; ?> />
-        <label name="si_captcha_donated" for="si_captcha_donated"><?php echo __('I have donated to help contribute for the development of this plugin.', 'si-captcha'); ?></label>
-        <br />
         <?php
         if (version_compare($wp_version, '3', '<')) { // wp 2 series
             ?>
@@ -209,22 +136,6 @@ if (isset($_POST['submit'])) {
             <?php
         }
         ?>
-
-        <h3><?php _e('Test Compatibility', 'si-captcha') ?></h3>
-
-        <p>
-            <?php
-            _e('Be sure to test the CAPTCHA and make sure it works. It should display, allow actions on valid code, and block actions on wrong code.', 'si-captcha');
-            echo ' ';
-            _e('Some other plugins or themes can cause conflicts that let spammers bypass the CAPTCHA.', 'si-captcha');
-            echo ' ';
-            _e('Some other security plugins use the same WordPress authenticate functions for Login and Registration.', 'si-captcha');
-            echo '</p><p>';
-            _e('After installing or updating plugins and themes, test the CAPTCHA on each form where it is enabled on.', 'si-captcha');
-            echo ' ';
-            _e('If the CAPTCHA does not work, try deactivating other plugins to find the one that is incompatible.', 'si-captcha');
-            ?>
-        </p>
 
         <h3><?php _e('Options', 'si-captcha') ?></h3>
 
@@ -439,18 +350,8 @@ _e('Enable this setting and javascript will relocate the button.', 'si-captcha')
             </table>
 
             <br />
-            <?php
-            // Check for older than PHP5
-            if (phpversion() < 5) {
-                echo '<br /><span style="color:red;">' . __('Warning: Your web host has not upgraded from PHP4 to PHP5.', 'si-captcha');
-                echo '</span> ';
-                echo __('PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.', 'si-captcha') . "<br />\n";
-                echo __('PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support.', 'si-captcha') . "<br /><br />\n";
-            }
-            ?>
-
-
-            <table cellspacing="2" cellpadding="5" class="form-table">
+           
+           <table cellspacing="2" cellpadding="5" class="form-table">
 
                 <tr>
                     <th scope="row" style="width: 75px;"><?php echo __('CAPTCHA Form CSS Style:', 'si-captcha'); ?></th>
@@ -575,25 +476,4 @@ echo ' '; ?>
         </p>
 
     </form>
-
-    <table style="border:none;" width="775">
-        <tr>
-            <td width="325">
-                <p><strong><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></strong></p>
-                <ul>
-                    <li><a href="http://www.fastsecurecontactform.com/" target="_blank"><?php echo __('Fast Secure Contact Form', 'si-captcha'); ?></a></li>
-                    <li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('SI CAPTCHA Anti-Spam', 'si-captcha'); ?></a></li>
-                    <li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo __('Visitor Maps and Who\'s Online', 'si-captcha'); ?></a></li>
-                </ul>
-                <?php if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
-                </td><td width="350">
-                    <?php echo sprintf(__('"I recommend <a href="%s" target="_blank">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer great features for WordPress users. If you click this link and start an account at HostGator, I get a small commission." - Mike Challis', 'si-captcha'), 'http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp&amp;page=http://www.hostgator.com/apps/wordpress-hosting.shtml'); ?>
-                </td><td width="100">
-                    <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp&amp;page=http://www.hostgator.com/apps/wordpress-hosting.shtml" target="_blank"><img title="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" alt="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
-    <?php
-}
-?>
-            </td>
-        </tr>
-    </table>
 </div>
