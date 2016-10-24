@@ -50,7 +50,7 @@ if (!class_exists('siCaptcha')) {
                 add_submenu_page('ms-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
                 add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
             } else if ($wpmu != 1) {
-                add_submenu_page('plugins.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
+                add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
             }
         }
 
