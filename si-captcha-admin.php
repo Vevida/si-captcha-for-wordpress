@@ -108,56 +108,7 @@ if (isset($_POST['submit'])) {
         }
     </script>
 
-    <?php
-    if (function_exists('get_transient')) {
-        require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
-
-        // Before, try to access the data, check the cache.
-        if (false === ($api = get_transient('si_captcha_info'))) {
-            // The cache data doesn't exist or it's expired.
-
-            $api = plugins_api('plugin_information', array('slug' => 'si-captcha-for-wordpress'));
-            if (!is_wp_error($api)) {
-                // cache isn't up to date, write this fresh information to it now to avoid the query for xx time.
-                $myexpire = 60 * 15; // Cache data for 15 minutes
-                set_transient('si_captcha_info', $api, $myexpire);
-            }
-        }
-        if (!is_wp_error($api)) {
-            $plugins_allowedtags = array('a' => array('href' => array(), 'title' => array(), 'target' => array()),
-                'abbr' => array('title' => array()), 'acronym' => array('title' => array()),
-                'code' => array(), 'pre' => array(), 'em' => array(), 'strong' => array(),
-                'div' => array(), 'p' => array(), 'ul' => array(), 'ol' => array(), 'li' => array(),
-                'h1' => array(), 'h2' => array(), 'h3' => array(), 'h4' => array(), 'h5' => array(), 'h6' => array(),
-                'img' => array('src' => array(), 'class' => array(), 'alt' => array()));
-            //Sanitize HTML
-            foreach ((array) $api->sections as $section_name => $content)
-                $api->sections[$section_name] = wp_kses($content, $plugins_allowedtags);
-            foreach (array('version', 'author', 'requires', 'tested', 'homepage', 'downloaded', 'slug') as $key)
-                $api->$key = wp_kses($api->$key, $plugins_allowedtags);
-
-            if (!empty($api->downloaded)) {
-                echo sprintf(__('Downloaded %s times', 'si-captcha'), number_format_i18n($api->downloaded));
-                echo '.';
-            }
-            ?>
-            <?php if (!empty($api->rating)) : ?>
-                <div class="si-star-holder" title="<?php echo esc_attr(sprintf(__('(Average rating based on %s ratings)', 'si-captcha'), number_format_i18n($api->num_ratings))); ?>">
-                    <div class="si-star si-star-rating" style="width: <?php echo esc_attr($api->rating) ?>px"></div>
-                    <div class="si-star si-star5"><img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/star.png" alt="<?php _e('5 stars', 'si-captcha') ?>" /></div>
-                    <div class="si-star si-star4"><img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/star.png" alt="<?php _e('4 stars', 'si-captcha') ?>" /></div>
-                    <div class="si-star si-star3"><img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/star.png" alt="<?php _e('3 stars', 'si-captcha') ?>" /></div>
-                    <div class="si-star si-star2"><img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/star.png" alt="<?php _e('2 stars', 'si-captcha') ?>" /></div>
-                    <div class="si-star si-star1"><img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/star.png" alt="<?php _e('1 star', 'si-captcha') ?>" /></div>
-                </div>
-                <small><?php echo sprintf(__('(Average rating based on %s ratings)', 'si-captcha'), number_format_i18n($api->num_ratings)); ?> <a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/si-captcha-for-wordpress"> <?php _e('rate', 'si-captcha') ?></a></small>
-                <br />
-            <?php endif; ?>
-
-            <?php
-        } // if ( !is_wp_error($api)
-    }// end if (function_exists('get_transient'
-
+	<?php
     $si_captcha_update = '';
     if (isset($api->version)) {
         if (version_compare($api->version, $si_captcha_version, '>')) {
