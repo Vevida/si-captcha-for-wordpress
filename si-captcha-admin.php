@@ -34,15 +34,6 @@ if (isset($_POST['submit'])) {
         'si_captcha_captcha_small' => (isset($_POST['si_captcha_captcha_small']) ) ? 'true' : 'false',
         'si_captcha_honeypot_enable' => (isset($_POST['si_captcha_honeypot_enable']) ) ? 'true' : 'false',
         'si_captcha_aria_required' => (isset($_POST['si_captcha_aria_required']) ) ? 'true' : 'false',
-        'si_captcha_external_style' => strip_tags(trim($_POST['si_captcha_external_style'])),
-        'si_captcha_comment_label_style' => (trim($_POST['si_captcha_comment_label_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_comment_label_style'])) : $si_captcha_option_defaults['si_captcha_comment_label_style'], // use default if empty
-        'si_captcha_comment_field_style' => (trim($_POST['si_captcha_comment_field_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_comment_field_style'])) : $si_captcha_option_defaults['si_captcha_comment_field_style'], // use default if empty
-        'si_captcha_captcha_div_style' => (trim($_POST['si_captcha_captcha_div_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_captcha_div_style'])) : $si_captcha_option_defaults['si_captcha_captcha_div_style'], // use default if empty
-        'si_captcha_captcha_div_style_sm' => (trim($_POST['si_captcha_captcha_div_style_sm']) != '' ) ? strip_tags(trim($_POST['si_captcha_captcha_div_style_sm'])) : $si_captcha_option_defaults['si_captcha_captcha_div_style_sm'], // use default if empty
-        'si_captcha_captcha_div_style_m' => (trim($_POST['si_captcha_captcha_div_style_m']) != '' ) ? strip_tags(trim($_POST['si_captcha_captcha_div_style_m'])) : $si_captcha_option_defaults['si_captcha_captcha_div_style_m'], // use default if empty
-        'si_captcha_captcha_input_div_style' => (trim($_POST['si_captcha_captcha_input_div_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_captcha_input_div_style'])) : $si_captcha_option_defaults['si_captcha_captcha_input_div_style'], // use default if empty
-        'si_captcha_captcha_image_style' => (trim($_POST['si_captcha_captcha_image_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_captcha_image_style'])) : $si_captcha_option_defaults['si_captcha_captcha_image_style'],
-        'si_captcha_refresh_image_style' => (trim($_POST['si_captcha_refresh_image_style']) != '' ) ? strip_tags(trim($_POST['si_captcha_refresh_image_style'])) : $si_captcha_option_defaults['si_captcha_refresh_image_style'],
         'si_captcha_required_indicator' => strip_tags(trim($_POST['si_captcha_required_indicator'])),
         'si_captcha_error_spambot' => strip_tags(trim($_POST['si_captcha_error_spambot'])),
         'si_captcha_error_incorrect' => strip_tags(trim($_POST['si_captcha_error_incorrect'])),
@@ -346,97 +337,7 @@ _e('Enable this setting and javascript will relocate the button.', 'si-captcha')
             <br />
            
            <table cellspacing="2" cellpadding="5" class="form-table">
-
-                <tr>
-                    <th scope="row" style="width: 75px;"><?php echo __('CAPTCHA Form CSS Style:', 'si-captcha'); ?></th>
-                    <td>
-                        <?php
-                        if ($si_captcha_opt['si_captcha_external_style'] != 'true') {
-                            ?>
-                            <input name="si_captcha_reset_styles" id="si_captcha_reset_styles" type="checkbox" />
-                            <label for="si_captcha_reset_styles"><strong><?php echo __('Reset the CAPTCHA form styles to default.', 'si-captcha') ?></strong></label><br />
-                            <br />
-                            <?php
-                        }
-                        ?>
-                        <strong><?php _e('Modifiable CAPTCHA Form CSS Style Feature:', 'si-captcha'); ?></strong>
-                        <a style="cursor:pointer;" title="<?php esc_attr_e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_css_tip');"><?php _e('help', 'si-captcha'); ?></a>
-                        <div style="text-align:left; display:none" id="si_captcha_css_tip">
-<?php _e('Use to adjust the font colors, image positioning, or other CSS styling of the CAPTCHA form.', 'si-captcha'); ?><br />
-<?php _e('Acceptable Examples:', 'si-captcha'); ?><br />
-                            color:#000000; background-color:#CCCCCC;<br />
-                            style="color:#000000; background-color:#CCCCCC;"<br />
-                        </div>
-                        <br />
-
-                        <label for="si_captcha_external_style"><?php echo __('Select the method of delivering the CAPTCHA form style:', 'si-captcha'); ?></label>
-                        <select id="si_captcha_external_style" name="si_captcha_external_style">
-                            <?php
-                            $style_opt_array = array(
-                                'false' => __('Internal Style Sheet CSS (default, edit below)', 'si-captcha'),
-                                'true' => __('External Style Sheet CSS (requires editing style.css)', 'si-captcha'),
-                            );
-                            $selected = '';
-                            foreach ($style_opt_array as $k => $v) {
-                                if ($si_captcha_opt['si_captcha_external_style'] == "$k")
-                                    $selected = ' selected="selected"';
-                                echo '<option value="' . esc_attr($k) . '"' . $selected . '>' . esc_html($v) . '</option>' . "\n";
-                                $selected = '';
-                            }
-                            ?>
-                        </select>
-                        <a style="cursor:pointer;" title="<?php esc_attr_e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_external_style_tip');"><?php _e('help', 'si-captcha'); ?></a>
-                        <div style="text-align:left; display:none" id="si_captcha_external_style_tip">
-<?php _e('By default, the CAPTCHA form styles are editable below when using "Internal Style Sheet CSS". The CAPTCHA CSS will be automatically be included in the page &lt;head&gt; section.', 'si-captcha');
-echo ' '; ?>
-<?php _e('Premium themes may have already added support for SI Captcha Anti-Spam style in the theme\'s style.css. If that is the case, then select "External Style Sheet CSS" if instructed by the theme\'s installation instructions.', 'si-captcha');
-echo ' '; ?>
-<?php _e('The CAPTCHA CSS will NOT be included in the page &lt;head&gt; section, and it must be included in the style.css of the theme. Be sure to remember this if you switch your theme later on.', 'si-captcha'); ?><br /><br />
-
-                            <strong><?php _e('External Style Sheet CSS starting point for theme builders:', 'si-captcha'); ?></strong><br />
-                            /*------------------------------------------------*/<br />
-                            /*------------[SI Captcha Anti-Spam]--------------*/<br />
-                            /*------------------------------------------------*/<br />
-                            div#captchaImgDiv { <?php echo $si_captcha_option_defaults['si_captcha_captcha_div_style']; ?> }<br />
-                            .captchaSizeDivSmall { <?php echo $si_captcha_option_defaults['si_captcha_captcha_div_style_sm']; ?> }<br />
-                            .captchaSizeDivLarge { <?php echo $si_captcha_option_defaults['si_captcha_captcha_div_style_m']; ?> }<br />
-                            img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $si_captcha_option_defaults['si_captcha_captcha_image_style']; ?> }<br />
-                            .captchaImgRefresh { <?php echo $si_captcha_option_defaults['si_captcha_refresh_image_style']; ?> }<br />
-                            div#captchaInputDiv { <?php echo $si_captcha_option_defaults['si_captcha_captcha_input_div_style']; ?> }<br />
-                            label#captcha_code_label { <?php echo $si_captcha_option_defaults['si_captcha_comment_label_style']; ?> }<br />
-                            input#captcha_code { <?php echo $si_captcha_option_defaults['si_captcha_comment_field_style']; ?> }<br />
-
-                        </div>
-                        <br />
-
-                        <?php
-                        $readonly = '';
-                        if ($si_captcha_opt['si_captcha_external_style'] == 'true') {
-                            $readonly = 'readonly="readonly"';
-                            echo '<div class="updated">';
-                            echo __('Caution: "External Style Sheet CSS" is enabled. This setting requires your theme\'s style.css to include the CAPTCHA CSS. Check the CAPTCHA images and input field on your comment form, make sure they are aligned properly. Be sure your theme includes the CAPTCHA style for this plugin, if it does not, then change the setting back to "Internal Style Sheet CSS".', 'si-captcha');
-                            echo "</div><br />\n";
-
-                            echo '<div class="si-notice">';
-                            echo __('Note: "Internal Style Sheet CSS" fields below are not editable while "External Style Sheet CSS" is enabled.', 'si-captcha');
-                            echo "</div><br />\n";
-                        }
-                        ?>
-
-                        <strong><?php _e('Internal Style Sheet CSS:', 'si-captcha'); ?></strong><br />
-                        <label for="si_captcha_captcha_div_style"><?php echo __('CSS style for CAPTCHA DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_div_style" id="si_captcha_captcha_div_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style']); ?>" size="50" /> div#captchaImgDiv<br />
-                        <label for="si_captcha_captcha_div_style_sm"><?php _e('CSS style for Small CAPTCHA Image DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_div_style_sm" id="si_captcha_captcha_div_style_sm" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_sm']); ?>" size="50" /> .captchaSizeDivSmall<br />
-                        <label for="si_captcha_captcha_div_style_m"><?php _e('CSS style for Large CAPTCHA Image DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_div_style_m" id="si_captcha_captcha_div_style_m" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_m']); ?>" size="50" /> .captchaSizeDivLarge<br />
-                        <label for="si_captcha_captcha_image_style"><?php echo __('CSS style for CAPTCHA image:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_image_style" id="si_captcha_captcha_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_image_style']); ?>" size="50" /> img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login<br />
-                        <label for="si_captcha_refresh_image_style"><?php echo __('CSS style for Refresh image:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_refresh_image_style" id="si_captcha_refresh_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_refresh_image_style']); ?>" size="50" /> .captchaImgRefresh <br />
-                        <label for="si_captcha_captcha_input_div_style"><?php echo __('CSS style for CAPTCHA input DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_input_div_style" id="si_captcha_captcha_input_div_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_input_div_style']); ?>" size="50" />div#captchaInputDiv<br />
-                        <label for="si_captcha_comment_label_style"><?php echo __('CSS style for CAPTCHA input label:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_comment_label_style" id="si_captcha_comment_label_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_comment_label_style']); ?>" size="50" />label#captcha_code_label<br />
-                        <label for="si_captcha_comment_field_style"><?php echo __('CSS style for CAPTCHA input field:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_comment_field_style" id="si_captcha_comment_field_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_comment_field_style']); ?>" size="50" />input#captcha_code
-                    </td>
-                </tr>
-
-
-                <tr>
+		   		<tr>
                     <th scope="row" style="width: 75px;"><?php echo __('Text Labels:', 'si-captcha'); ?></th>
                     <td>
 

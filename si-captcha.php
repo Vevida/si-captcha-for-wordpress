@@ -72,15 +72,6 @@ if (!class_exists('siCaptcha')) {
                 'si_captcha_captcha_small' => 'false',
                 'si_captcha_honeypot_enable' => 'false',
                 'si_captcha_aria_required' => 'false',
-                'si_captcha_external_style' => 'false',
-                'si_captcha_captcha_div_style' => 'display:block;',
-                'si_captcha_captcha_div_style_sm' => 'width:175px; height:45px; padding-top:10px;',
-                'si_captcha_captcha_div_style_m' => 'width:250px; height:60px; padding-top:10px;',
-                'si_captcha_captcha_image_style' => 'border-style:none; margin:0; padding-right:5px; float:left;',
-                'si_captcha_refresh_image_style' => 'border-style:none; margin:0; vertical-align:bottom;',
-                'si_captcha_captcha_input_div_style' => 'display:block; padding-top:15px; padding-bottom:5px;',
-                'si_captcha_comment_label_style' => 'margin:0;',
-                'si_captcha_comment_field_style' => 'width:65px;',
                 'si_captcha_label_captcha' => '',
                 'si_captcha_error_spambot' => '',
                 'si_captcha_error_incorrect' => '',
@@ -123,14 +114,7 @@ if (!class_exists('siCaptcha')) {
                 $si_captcha_opt[$key] = $this->si_stripslashes($val);
             }
 
-            if ($si_captcha_opt['si_captcha_captcha_image_style'] == '') {
-                // if default styles are missing, reset styles
-                $style_resets_arr = array('si_captcha_comment_label_style', 'si_captcha_comment_field_style', 'si_captcha_captcha_div_style', 'si_captcha_captcha_div_style_sm', 'si_captcha_captcha_div_style_m', 'si_captcha_captcha_input_div_style', 'si_captcha_captcha_image_style', 'si_captcha_refresh_image_style');
-                foreach ($style_resets_arr as $style_reset) {
-                    $si_captcha_opt[$style_reset] = $si_captcha_option_defaults[$style_reset];
-                }
-            }
-
+            
             if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)
                 $si_captcha_opt['si_captcha_login'] = 'false'; // disable captcha on xmlrpc connections
         }
@@ -1067,86 +1051,16 @@ EOT;
             return $string;
         }
 
-// end function si_captcha_convert_css
-
-        function si_captcha_admin_head() {
-            // only load this header stuff on the admin settings page
-            if (isset($_GET['page']) && is_string($_GET['page']) && preg_match('/si-captcha.php$/', $_GET['page'])) {
-                ?>
-                <!-- begin SI CAPTCHA Anti-Spam - admin settings page header code -->
-                <style type="text/css">
-                    div.si-star-holder { position: relative; height:19px; width:100px; font-size:19px;}
-                    div.si-star {height: 100%; position:absolute; top:0px; left:0px; background-color: transparent; letter-spacing:1ex; border:none;}
-                    .si-star1 {width:20%;} .si-star2 {width:40%;} .si-star3 {width:60%;} .si-star4 {width:80%;} .si-star5 {width:100%;}
-                    .si-star.si-star-rating {background-color: #fc0;}
-                    .si-star img{display:block; position:absolute; right:0px; border:none; text-decoration:none;}
-                    div.si-star img {width:19px; height:19px; border-left:1px solid #fff; border-right:1px solid #fff;}
-                    .si-notice{background-color:#ffffe0;border-color:#e6db55;border-width:1px;border-style:solid;padding:5px;margin:5px 5px 20px;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
-                    .fscf_left {clear:left; float:left;}
-                    .fscf_img {margin:0 10px 10px 0;}
-                    .fscf_tip {text-align:left; display:none;color:#006B00;padding:5px;}
-                </style>
-                <!-- end SI CAPTCHA Anti-Spam - admin settings page header code -->
-                <?php
-            } // end if(isset($_GET['page'])
-        }
-
         function si_captcha_login_head() {
             global $si_captcha_opt;
+            wp_enqueue_style('mg_captcha', plugins_url('./style.min.css', __FILE__));
+             
+            //TODO MDG; enqueue script toevoegen
             echo '<script type="text/javascript" src="' . plugins_url('si-captcha-for-wordpress/captcha/si_captcha.js?ver=' . time()) . '"></script>' . "\n";
-
-            // only load this css on the blog pages where login/register could be
-            if ($si_captcha_opt['si_captcha_external_style'] == 'true')
-                return;
-            ?>
-            <!-- begin SI CAPTCHA Anti-Spam - login/register form style -->
-            <style type="text/css">
-                div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'], 'si_captcha_captcha_div_style'); ?> }
-                .captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'], 'si_captcha_captcha_div_style_sm'); ?> }
-                .captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'], 'si_captcha_captcha_div_style_m'); ?> }
-                img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'], 'si_captcha_captcha_image_style'); ?> }
-                .captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'], 'si_captcha_refresh_image_style'); ?> }
-                div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'], 'si_captcha_captcha_input_div_style'); ?> }
-                label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'], 'si_captcha_comment_label_style'); ?> }
-                input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'], 'si_captcha_comment_field_style'); ?> }
-            </style>
-            <!-- end SI CAPTCHA Anti-Spam - login/register form style -->
-            <?php
         }
 
         function si_captcha_add_css() {
-            global $si_captcha_opt, $si_captcha_add_script;
-
-            if (!$si_captcha_add_script)
-                return;
-
-            // only load this css on the blog pages where the captcha could be
-            wp_enqueue_script('jquery');
-            if ($si_captcha_opt['si_captcha_external_style'] != 'true') {
-                ?>
-                <script type="text/javascript">
-                //<![CDATA[
-                    var si_captcha_styles = "\
-                <!-- begin SI CAPTCHA Anti-Spam - comment form style -->\
-                <style type='text/css'>\
-                div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'], 'si_captcha_captcha_div_style'); ?> }\
-                .captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'], 'si_captcha_captcha_div_style_sm'); ?> }\
-                .captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'], 'si_captcha_captcha_div_style_m'); ?> }\
-                img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'], 'si_captcha_captcha_image_style'); ?> }\
-                .captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'], 'si_captcha_refresh_image_style'); ?> }\
-                div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'], 'si_captcha_captcha_input_div_style'); ?> }\
-                label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'], 'si_captcha_comment_label_style'); ?> }\
-                input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'], 'si_captcha_comment_field_style'); ?> }\
-                </style>\
-                <!-- end SI CAPTCHA Anti-Spam - comment form style -->\
-                ";
-                    jQuery(document).ready(function ($) {
-                        $('head').append(si_captcha_styles);
-                    });
-                //]]>
-                </script>
-                <?php
-            }
+            wp_enqueue_style('mg_captcha', plugins_url('./style.min.css', __FILE__));
         }
 
         function si_captcha_add_script() {
@@ -1258,10 +1172,8 @@ if (isset($si_image_captcha)) {
     add_action('admin_menu', array(&$si_image_captcha, 'si_captcha_add_tabs'), 1);
     add_action('admin_head', array(&$si_image_captcha, 'si_captcha_admin_head'), 1);
 
-    if ($si_captcha_opt['si_captcha_external_style'] != 'true' && !is_admin()) {
-        // css is added to footer, then jquery appends it to head
-        add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_css'));
-    }
+	add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_css'));
+    
 
     // adds "Settings" link to the plugin action page
     add_filter('plugin_action_links', array(&$si_image_captcha, 'si_captcha_plugin_action_links'), 10, 2);
