@@ -84,12 +84,6 @@ if (!class_exists('siCaptcha')) {
                 'si_captcha_tooltip_refresh' => '',
             );
 
-            // upgrade path from old version
-            if ($wpmu != 1 && !get_option('si_captcha') && get_option('si_captcha_comment')) {
-                // just now updating, migrate settings
-                $si_captcha_option_defaults = $this->si_captcha_migrate($si_captcha_option_defaults);
-            }
-
             // install the option defaults
             if ($wpmu == 1) {
                 if (!get_site_option('si_captcha')) {
@@ -119,20 +113,6 @@ if (!class_exists('siCaptcha')) {
         }
 
 // end function si_captcha_get_options
-
-        function si_captcha_migrate($si_captcha_option_defaults) {
-            // read the options from the prior version
-            $new_options = array();
-            foreach ($si_captcha_option_defaults as $key => $val) {
-                $new_options[$key] = get_option("$key");
-                // now delete the options from the prior version
-                delete_option("$key");
-            }
-            // now the old settings will carry over to the new version
-            return $new_options;
-        }
-
-// end function si_captcha_migrate
 
         function si_captcha_options_page() {
             global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults, $si_captcha_version;
@@ -1103,7 +1083,7 @@ if (isset($si_image_captcha)) {
     else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_exists('is_site_admin')) // optionally activated
         $wpmu = 2;
 
-    $si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha';
+    $si_captcha_dir = dirname(plugin_basename(__FILE__)) . '/si-captcha-for-wordpress/captcha';
     if ($wpmu == 1) {
         if (defined('MUPLUGINDIR'))
             $si_captcha_dir = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha';
