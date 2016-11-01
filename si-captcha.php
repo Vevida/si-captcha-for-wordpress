@@ -2,7 +2,7 @@
 /*
   Plugin Name: SI CAPTCHA Anti-Spam
   Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
-  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a>
+  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="options-general.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a>
   Version: 2.7.7.8
   Author: Mike Challis
   Author URI: http://www.642weather.com/weather/scripts.php
@@ -116,7 +116,7 @@ if (!class_exists('siCaptcha')) {
 
         function si_captcha_options_page() {
             global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults, $si_captcha_version;
-
+            
             $si_captcha_admin_path = str_replace('/captcha', '', $si_captcha_dir);
             if ($wpmu == 1)
                 $si_captcha_admin_path = 'si-captcha-for-wordpress';
@@ -888,7 +888,7 @@ EOT;
                 $this_plugin = plugin_basename(__FILE__);
 
             if ($file == $this_plugin) {
-                $settings_link = '<a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">' . __('Settings', 'si-captcha') . '</a>';
+                $settings_link = '<a href="options-general.php?page=si-captcha-for-wordpress/si-captcha.php">' . __('Settings', 'si-captcha') . '</a>';
                 array_unshift($links, $settings_link);
             }
             return $links;
@@ -1083,7 +1083,7 @@ if (isset($si_image_captcha)) {
     else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_exists('is_site_admin')) // optionally activated
         $wpmu = 2;
 
-    $si_captcha_dir = dirname(plugin_basename(__FILE__)) . '/si-captcha-for-wordpress/captcha';
+	$si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha';
     if ($wpmu == 1) {
         if (defined('MUPLUGINDIR'))
             $si_captcha_dir = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha';
