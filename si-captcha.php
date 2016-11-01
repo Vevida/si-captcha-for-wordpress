@@ -1079,7 +1079,7 @@ if (isset($si_image_captcha)) {
 
     $wpmu = 0;
 	
-	if(strpos(dirname(__FILE__), 'mu-plugins') !== false)
+	if(strpos(dirname(__FILE__), MUPLUGINDIR) !== false)
 	{
 		$wpmu = 1;
 	}
