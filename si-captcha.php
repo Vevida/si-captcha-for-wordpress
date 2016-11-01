@@ -7,7 +7,8 @@
   Author: Mike Challis
   Author URI: http://www.642weather.com/weather/scripts.php
  */
-
+ 
+ 
 $si_captcha_version = '2.7.7.8';
 
 /*  Copyright (C) 2008-2016 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
@@ -1077,13 +1078,13 @@ if (isset($si_image_captcha)) {
 //    2  WordPress MU Optional Activation
 
     $wpmu = 0;
-
-    if (basename(dirname(__FILE__)) == "mu-plugins") // forced activated
-        $wpmu = 1;
-    else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_exists('is_site_admin')) // optionally activated
-        $wpmu = 2;
-
-	$si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha';
+	
+	if(strpos(dirname(__FILE__), 'mu-plugins') !== false)
+	{
+		$wpmu = 1;
+	}
+	
+    $si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha';
     if ($wpmu == 1) {
         if (defined('MUPLUGINDIR'))
             $si_captcha_dir = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha';
