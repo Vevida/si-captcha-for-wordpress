@@ -1,444 +1,467 @@
-# SI CAPTCHA Anti-Spam
-# This file is put in the public domain.
-#
-# Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
-# Description: A CAPTCHA to protect comment posts and or registrations in WordPress
-# Version: 2.2.7
-# Author: Mike Challis
-# Author URI: http://www.642weather.com/weather/scripts.php
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.2.7\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
-"POT-Creation-Date: 2008-12-14 17:48+0000\n"
-"PO-Revision-Date: 2011-12-08 18:44+0100\n"
-"Last-Translator: Paul Backus <info@pbackus.com>\n"
+"Project-Id-Version: SI CAPTCHA Anti-Spam - VEVIDA\n"
+"POT-Creation-Date: 2016-11-12 08:21-0500\n"
+"PO-Revision-Date: 2016-11-12 08:24-0500\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: si-captcha.php\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: si-captcha.php:44
-#: si-captcha.php:45
-#: si-captcha.php:48
-#: si-captcha.php:203
-msgid "SI Captcha Options"
-msgstr "SI Captcha Options"
-
-#: si-captcha.php:136
+#: si-captcha-admin.php:20
 msgid "You do not have permissions for managing this option"
-msgstr "U heeft geen rechten om deze optie te wijzigen"
+msgstr "Je hebt niet het recht deze optie te beheren"
 
-#: si-captcha.php:200
+#: si-captcha-admin.php:75
 msgid "Options saved."
-msgstr "Opties opgeslagen."
+msgstr "Opties opgeslagen"
 
-#: si-captcha.php:216
-msgid "Changelog"
-msgstr "Wijzigings-overzicht"
+#: si-captcha-admin.php:78 si-captcha.php:34 si-captcha.php:35
+#: si-captcha.php:37
+msgid "SI Captcha Options"
+msgstr "SI Captcha Opties"
 
-#: si-captcha.php:217
-msgid "FAQ"
-msgstr "FAQ"
-
-#: si-captcha.php:218
-msgid "Rate This"
-msgstr "Waardeer dit"
-
-#: si-captcha.php:219
-msgid "Support"
-msgstr "Support"
-
-#: si-captcha.php:220
-#: si-captcha.php:228
-msgid "Donate"
-msgstr "Doneer"
-
-#: si-captcha.php:221
-msgid "Free PHP Scripts"
-msgstr "Gratis PHP scripts"
-
-#: si-captcha.php:222
-msgid "Contact"
-msgstr "Contact"
-
-#: si-captcha.php:239
-msgid "If you find this plugin useful to you, please consider making a small donation to help contribute to further development. Thanks for your kind support!"
-msgstr "Als deze plugin zinvol is voor u, overweeg dan een kleine donatie te doen om zo toekomstige ontwikkelingen te helpen. Dank u vriendelijk voor uw support!"
-
-#: si-captcha.php:260
-msgid "I have donated to help contribute for the development of this plugin."
-msgstr "Ik heb gedoneerd om toekomstige ontwikkelingen van deze plugin te ondersteunen."
-
-#: si-captcha.php:263
+#: si-captcha-admin.php:109
 msgid "Usage"
 msgstr "Gebruik"
 
-#: si-captcha.php:266
+#: si-captcha-admin.php:112
 msgid "Your theme must have a"
-msgstr "In uw thema ontbreekt"
+msgstr "Uw thema moet hebben"
 
-#: si-captcha.php:266
+#: si-captcha-admin.php:112
 msgid "tag inside your comments.php form. Most themes do."
-msgstr "tag bevinden zich in uw comments.php formulier. De meeste thema's hebben dit."
+msgstr "tag in je comments.php vorm. De meeste thema's te doen."
 
-#: si-captcha.php:267
-msgid "The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea, or the captcha image and captcha code entry might display after the submit button."
-msgstr "De beste plek om de tag te vinden is voor het commentaar tekstveld, u zou het kunnen verplaatsen indien het zich onder het commentaar tekstveld bevindt, anders zou de captcha afbeelding en captcha code achter de Verstuurknop kunnen verschijnen."
+#: si-captcha-admin.php:114
+msgid ""
+"The best place to locate the tag is before the comment textarea, you may "
+"want to move it if it is below the comment textarea, or the captcha image "
+"and captcha code entry might display after the submit button."
+msgstr ""
+"De beste plaats om de tag te vinden is voor het commentaar tekstveld, kunt u "
+"om het te verplaatsen als ze onder het commentaar tekstveld, of het imago "
+"van de captcha en captcha code zou geven na de submit knop."
 
-#: si-captcha.php:270
-msgid "Options"
-msgstr "Opties"
+#: si-captcha-admin.php:125
+msgid "CAPTCHA:"
+msgstr "CAPTCHA"
 
-#: si-captcha.php:273
-#: si-captcha.php:432
-msgid "Update Options"
-msgstr "Opties bijwerken"
+#: si-captcha-admin.php:129
+msgid "Check to disable CAPTCHA."
+msgstr "Schakel CAPTCHA volledig uit."
 
-#: si-captcha.php:280
-msgid "CAPTCHA Support Test:"
-msgstr "CAPTCHA support test:"
-
-#: si-captcha.php:282
-msgid "Test if your PHP installation will support the CAPTCHA"
-msgstr "Test of uw PHP installatie CAPTCHA ondersteunt"
-
-#: si-captcha.php:287
-msgid "CAPTCHA difficulty:"
-msgstr "CAPTCHA moeilijkheid"
-
-#: si-captcha.php:289
-msgid "CAPTCHA difficulty level:"
-msgstr "CAPTCHA moeilijkheidsgraad:"
-
-#: si-captcha.php:293
-msgid "Low"
-msgstr "Laag"
-
-#: si-captcha.php:294
-msgid "Medium"
-msgstr "Gemiddeld"
-
-#: si-captcha.php:295
-msgid "High"
-msgstr "Hoog"
-
-#: si-captcha.php:309
-msgid "CAPTCHA on Login Form:"
-msgstr "CAPTHA op loginscherm:"
-
-#: si-captcha.php:312
+#: si-captcha-admin.php:133
 msgid "Enable CAPTCHA on the login form."
-msgstr "Activeer CAPTCHA op het loginscherm."
+msgstr "Inschakelen CAPTCHA op het login formulier."
 
-#: si-captcha.php:313
-#: si-captcha.php:350
-#: si-captcha.php:382
-#: si-captcha.php:414
+#: si-captcha-admin.php:134 si-captcha-admin.php:142 si-captcha-admin.php:150
+#: si-captcha-admin.php:158 si-captcha-admin.php:190 si-captcha-admin.php:198
+#: si-captcha-admin.php:208 si-captcha-admin.php:216 si-captcha-admin.php:229
+#: si-captcha-admin.php:241
 msgid "Click for Help!"
-msgstr "Klik voor Hulp!"
+msgstr "Klik hier voor hulp"
 
-#: si-captcha.php:313
-#: si-captcha.php:350
-#: si-captcha.php:382
-#: si-captcha.php:414
+#: si-captcha-admin.php:134 si-captcha-admin.php:142 si-captcha-admin.php:150
+#: si-captcha-admin.php:158 si-captcha-admin.php:190 si-captcha-admin.php:198
+#: si-captcha-admin.php:208 si-captcha-admin.php:216 si-captcha-admin.php:229
+#: si-captcha-admin.php:241
 msgid "help"
 msgstr "help"
 
-#: si-captcha.php:315
-msgid "The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in."
-msgstr "De captcha op het Loginscherm is niet geactiveerd omdat dit vervelend kan zijn voor gebruikers. Activeer dit alleen indien u spam problemen heeft gerelateerd aan bots die automatisch proberen in te loggen."
+#: si-captcha-admin.php:136
+msgid ""
+"The Login form captcha is not enabled by default because it might be "
+"annoying to users. Only enable it if you are having spam problems related to "
+"bots automatically logging in."
+msgstr ""
+"De login formulier captcha is niet standaard ingeschakeld, omdat het "
+"vervelend voor de gebruikers zou kunnen zijn. Alleen inschakelen als je met "
+"spam problemen in verband met bots automatisch in te loggen."
 
-#: si-captcha.php:321
-msgid "CAPTCHA on Register Form:"
-msgstr "CAPTCHA op Registratie formulier:"
-
-#: si-captcha.php:324
+#: si-captcha-admin.php:141
 msgid "Enable CAPTCHA on the register form."
-msgstr "Activeer CAPTCHA op registratie formulier."
+msgstr "Inschakelen CAPTCHA op het inschrijfformulier."
 
-#: si-captcha.php:329
-msgid "CAPTCHA on Comment Form:"
-msgstr "CAPTCHA op Commentaar formulier:"
+#: si-captcha-admin.php:144
+msgid ""
+"Prevents automated spam bots by requiring that the user pass a CAPTCHA test "
+"before registering."
+msgstr ""
+"Voorkomt spam bots door te eisen dat de gebruiker een CAPTCHA-test voordat u "
+"zich inschrijft."
 
-#: si-captcha.php:332
+#: si-captcha-admin.php:149
+msgid "Enable CAPTCHA on the lost password form."
+msgstr "Inschakelen CAPTCHA op het verloren wachtwoord formulier."
+
+#: si-captcha-admin.php:152
+msgid ""
+"Prevents automated spam bots by requiring that the user pass a CAPTCHA test "
+"before lost password request."
+msgstr ""
+"Voorkomt spam bots door te eisen dat de gebruiker een CAPTCHA-test voor "
+"verloren wachtwoord verzoek passeren."
+
+#: si-captcha-admin.php:157
 msgid "Enable CAPTCHA on the comment form."
-msgstr "Activeer CAPTCHA op het commentaar formulier."
+msgstr "Inschakelen CAPTCHA op het reactieformulier."
 
-#: si-captcha.php:335
+#: si-captcha-admin.php:160
+msgid ""
+"Prevents automated spam bots by requiring that the user pass a CAPTCHA test "
+"before posting comments."
+msgstr ""
+"Voorkomt spam bots door te eisen dat de gebruiker een CAPTCHA-test voor het "
+"plaatsen van reacties."
+
+#: si-captcha-admin.php:166
 msgid "Hide CAPTCHA for"
-msgstr "Verberg CAPTCHA voor"
+msgstr "CAPTCHA verbergen voor"
 
-#: si-captcha.php:336
+#: si-captcha-admin.php:167
 msgid "registered"
 msgstr "geregistreerde"
 
-#: si-captcha.php:337
+#: si-captcha-admin.php:168
 msgid "users who can:"
 msgstr "gebruikers die kunnen:"
 
-#: si-captcha.php:340
-msgid "CSS class name for CAPTCHA input field on the comment form"
-msgstr "CSS class naam voor CAPTCHA invoerveld op het commentaar formulier"
+#: si-captcha-admin.php:172
+msgid "CAPTCHA input label position on the comment form:"
+msgstr "CAPTCHA ingang label positie op het reactieformulier:"
 
-#: si-captcha.php:341
-msgid "(Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.)"
-msgstr "(Voer een CSS class naam in alleen indien uw theme deze gebruikt voor het commentaar invoer. Standaard instelling is leeg.)"
+#: si-captcha-admin.php:176
+msgid "input-label-required"
+msgstr "-Input-label vereist"
 
-#: si-captcha.php:346
-msgid "Comment Form Rearrange:"
-msgstr "Herschikken Commentaar formulier:"
+#: si-captcha-admin.php:177
+msgid "label-required-input"
+msgstr "-Label vereist-ingang"
 
-#: si-captcha.php:349
-msgid "Change the display order of the catpcha input field on the comment form."
-msgstr "Wijzig de volgorde van weergeven van het captcha invoerveld op het commentaar formulier."
+#: si-captcha-admin.php:178
+msgid "label-required-linebreak-input"
+msgstr "-Label vereist-linebreak-ingang"
 
-#: si-captcha.php:352
-msgid "Problem:"
-msgstr "Probleem:"
+#: si-captcha-admin.php:179
+msgid "label-input-required"
+msgstr "-Label-ingang vereist"
 
-#: si-captcha.php:353
-msgid "Sometimes the captcha image and captcha input field are displayed AFTER the submit button on the comment form."
-msgstr "Soms worden de captcha afbeelding en captcha invoerveld weergegeven NA de verstuurknop op het commentaar formulier."
+#: si-captcha-admin.php:192
+msgid ""
+"Changes position of the CAPTCHA input labels on the comment form. Some "
+"themes have different label positions on the comment form. After changing "
+"this setting, be sure to view the comments to verify the setting is correct."
+msgstr ""
+"Verandert positie van de CAPTCHA-ingang etiketten op het reactieformulier. "
+"Sommige thema's hebben verschillende label posities op het reactieformulier. "
+"Na het wijzigen van deze instelling, moet u de opmerkingen bekijken om te "
+"controleren of de instelling correct is."
 
-#: si-captcha.php:354
-msgid "Fix:"
-msgstr "Oplossing:"
+#: si-captcha-admin.php:197
+msgid ""
+"Change the display order of the CAPTCHA input field on the comment form."
+msgstr ""
+"Verander de volgorde van de input veld CAPTCHA op het reactieformulier."
 
-#: si-captcha.php:355
-msgid "Edit your current theme comments.php file and locate this line:"
-msgstr "Open comments.php in uw huidige thema en lokaliseer de volgende regel: "
+#: si-captcha-admin.php:200
+msgid ""
+"Sometimes the CAPTCHA image and input field are displayed AFTER the submit "
+"button on the comment form."
+msgstr ""
+"Soms imago van de CAPTCHA en invoerveld worden weergegeven nadat de knop in "
+"te dienen over het reactieformulier."
 
-#: si-captcha.php:357
-msgid "This tag is exactly where the captcha image and captcha code entry will display on the form, so move the line to BEFORE the comment textarea, uncheck the option box above, and the problem should be fixed."
-msgstr "Deze tag verschijnt precies op de plek waar de captcha afbeelding en captcha code zullen verschijnen op het formulier, dus verplaats de regel naar VOOR het commentaar tekstveld, vink de optie hierboven uit en het probleem zou verholpen moeten zijn."
+#: si-captcha-admin.php:202
+msgid "Enable this setting and javascript will relocate the button."
+msgstr "Schakel deze instelling en javascript zal de knop verhuizen."
 
-#: si-captcha.php:358
-msgid "Alernately you can just check the box above and javascript will attempt to rearrange it for you, but editing the comments.php, moving the tag, and unchecking this box is the best solution."
-msgstr "Eventueel kunt u die optie hierboven aanvinken waarna javascript een poging zal doen het te ordenen, maar bewerken van comments.php, verplaatsen van de tag en het uitvinken van deze box is de beste oplossing."
+#: si-captcha-admin.php:207
+msgid "Enable smaller size CAPTCHA image."
+msgstr "Gebruik een kleinere CAPTCHA-afbeelding."
 
-#: si-captcha.php:359
-msgid "Why is it better to uncheck this and move the tag? because the XHTML will no longer validate on the comment page if it is checked."
-msgstr "Waarom is het beter om deze optie uit te vinken en de tag te verplaatsen? Omdat de XHTML niet langer valideert op de commentaar pagina wanneer deze optie is aangevinkt."
+#: si-captcha-admin.php:210
+msgid "Makes the CAPTCHA image smaller."
+msgstr "Maakt imago van de CAPTCHA kleiner."
 
-#: si-captcha.php:366
-msgid "CAPTCHA Options:"
-msgstr "CAPTCHA opties:"
+#: si-captcha-admin.php:215
+msgid "Enable honeypot spambot trap."
+msgstr "Enable honeypot spambot te houden."
 
-#: si-captcha.php:369
-msgid "Enable Flash Audio for the CAPTCHA."
-msgstr "Activeer Flash audio voor de CAPTCHA"
+#: si-captcha-admin.php:218
+msgid ""
+"Enables hidden empty field honyepot trap for spam bots. For best results, do "
+"not enable unless you have a spam problem."
+msgstr ""
+"Schakelt hidden leeg veld honyepot val voor spam bots. Voor het beste "
+"resultaat, niet in te schakelen, tenzij u een spam-probleem."
 
-#: si-captcha.php:372
-msgid "Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix)."
-msgstr "Schakel CAPTCHA transparante tekst uit (alleen als captcha tekst niet verschijnt op de afbeelding, probeer deze nood-oplossing)."
-
-#: si-captcha.php:378
+#: si-captcha-admin.php:225
 msgid "Accessibility:"
-msgstr "Bereikbaarheid:"
+msgstr "Toegankelijkheid"
 
-#: si-captcha.php:381
+#: si-captcha-admin.php:228
 msgid "Enable aria-required tags for screen readers"
-msgstr "Activeer aria-required tags voor screen readers"
+msgstr "Enable-aria vereist tags voor schermlezers"
 
-#: si-captcha.php:384
-msgid "aria-required is a form input WAI ARIA tag. Screen readers use it to determine which fields are required. Enabling this is good for accessability, but will cause the HTML to fail the W3C Validation (there is no attribute \"aria-required\"). WAI ARIA attributes are soon to be accepted by the HTML validator, so you can safely ignore the validation error it will cause."
-msgstr "aria-required is een formulier invoer WAI ARIA tag. Screen readers gebruiken het om vast te stellen welke velden benodigd zijn. Het activeren is goed voor de toegankelijkheid, maar zal als gevolg hebben dat HTML niet door de W3C keuring komt (er is geen attribute \"aria-required\"). WAI ARIA attributes worden binnenkort geaccepteerd door de HTML validator, dus u kunt veilig de validatiefout negeren. "
+#: si-captcha-admin.php:231
+msgid ""
+"aria-required is a form input WAI ARIA tag. Screen readers use it to "
+"determine which fields are required. Enabling this is good for "
+"accessability, but will cause the HTML to fail the W3C Validation (there is "
+"no attribute \"aria-required\"). WAI ARIA attributes are soon to be accepted "
+"by the HTML validator, so you can safely ignore the validation error it will "
+"cause."
+msgstr ""
+"aria-vereist is een formulier-tag WAI ARIA. Schermlezers gebruiken dit om te "
+"bepalen welke velden verplicht zijn. Als je dit inschakelt, zal het de "
+"toegankelijkheid van het formulier bevorderen, maar zal er voor zorgen dat "
+"de HTML-code niet door de W3C-test komt (er is geen attribuut 'aria-"
+"required').  'WAI ARIA'-attributen zullen spoedig geaccepteerd worden door "
+"de html-test, je kunt dus rustig de fout-melding negeren."
 
-#: si-captcha.php:391
-msgid "Click for Advanced Options"
-msgstr "Klik voor geavanceerde opties"
+#: si-captcha-admin.php:237
+msgid "Akismet:"
+msgstr "Akismet: spam"
 
-#: si-captcha.php:397
-msgid "Inline CSS Style:"
-msgstr "Inline CSS stijl:"
+#: si-captcha-admin.php:239
+msgid "Akismet spam prevention status:"
+msgstr "Akismet spam preventie status:"
 
-#: si-captcha.php:401
-msgid "Reset the styles to default."
-msgstr "Herstel de stijlen naar standaard"
+#: si-captcha-admin.php:243
+msgid ""
+"Akismet is a WordPress plugin. Akismet will greatly reduce or even "
+"completely eliminate the comment and trackback spam you get on your site. If "
+"one does happen to get through, simply mark it as \"spam\" on the moderation "
+"screen and Akismet will learn from the mistakes. When Akismet is installed "
+"and active, all comment posts will be checked with Akismet to help prevent "
+"spam."
+msgstr ""
+"Akismet is een WordPress-plugin. Akismet zal sterk verminderen of zelfs "
+"volledig te elimineren het commentaar en trackback spam je krijgt op uw "
+"site. Als men toch gebeurt door te komen, gewoon markeren als \"spam\" op de "
+"matiging scherm en Akismet zal leren van de fouten. Wanneer Akismet is "
+"geïnstalleerd en actief is, worden alle commentaar berichten worden "
+"gecontroleerd met Akismet om spam te voorkomen."
 
-#: si-captcha.php:403
-msgid "CSS style for CAPTCHA div:"
-msgstr "CSS style voor CAPTCHA div:"
+#: si-captcha-admin.php:251
+msgid "Akismet is installed."
+msgstr "Akismet geïnstalleerd."
 
-#: si-captcha.php:404
-msgid "CSS style for CAPTCHA image:"
-msgstr "CSS style voor CAPTCHA afbeelding:"
+#: si-captcha-admin.php:255
+msgid ""
+"Check this and click \"Update Options\" to determine if Akismet key is "
+"active."
+msgstr ""
+"Controleer deze en klik op \"Update Opties\" om te bepalen of Akismet-toets "
+"actief is."
 
-#: si-captcha.php:405
-msgid "CSS style for Audio image:"
-msgstr "CSS style voor audio afbeelding:"
+#: si-captcha-admin.php:271
+msgid ""
+"Akismet is installed and the key is valid. Comment posts will be checked "
+"with Akismet to help prevent spam."
+msgstr ""
+"Akismet is geïnstalleerd en de sleutel geldig is. Reactie posten zullen "
+"worden gecontroleerd met Akismet om spam te voorkomen."
 
-#: si-captcha.php:406
-msgid "CSS style for Refresh image:"
-msgstr "CSS style voor Ververs afbeelding:"
+#: si-captcha-admin.php:274
+msgid "Akismet plugin is installed but key needs to be activated."
+msgstr ""
+"Akismet plugin is geïnstalleerd, maar de belangrijkste moet worden "
+"geactiveerd."
 
-#: si-captcha.php:412
-msgid "Text Labels:"
-msgstr "Tekst labels:"
+#: si-captcha-admin.php:277
+msgid "Akismet plugin is installed but key failed to verify."
+msgstr ""
+"Akismet plugin is geïnstalleerd, maar het toetsenbord niet te controleren."
 
-#: si-captcha.php:416
-msgid "Some people wanted to change the text labels. These fields can be filled in to override the standard text labels."
-msgstr "Sommige gebruikers wilden de tekst labels wijzigen. Deze velden kunnen ingevuld worden om de standaard labels te overschrijven."
+#: si-captcha-admin.php:280
+msgid "Configure Akismet"
+msgstr "configureren Akismet"
 
-#: si-captcha.php:419
-#: si-captcha.php:523
-#: si-captcha.php:573
-#: si-captcha.php:618
-#: si-captcha.php:647
-#: si-captcha.php:690
-#: si-captcha.php:722
-msgid "CAPTCHA Code"
-msgstr "CAPTCHA code"
+#: si-captcha-admin.php:283
+msgid "Akismet plugin is not installed or is deactivated."
+msgstr "Akismet plugin is niet geïnstalleerd of is uitgeschakeld."
 
-#: si-captcha.php:420
-#: si-captcha.php:886
-#: si-captcha.php:888
-msgid "CAPTCHA Image"
-msgstr "CAPTCHA afbeelding"
+#: si-captcha-admin.php:296
+msgid "Update Options"
+msgstr "Opties bijwerken"
 
-#: si-captcha.php:421
-#: si-captcha.php:907
-#: si-captcha.php:910
-msgid "CAPTCHA Audio"
-msgstr "CAPTCHA geluid"
-
-#: si-captcha.php:422
-#: si-captcha.php:917
-#: si-captcha.php:920
-msgid "Refresh Image"
-msgstr "Ververs afbeelding"
-
-#: si-captcha.php:437
-msgid "More WordPress plugins by Mike Challis:"
-msgstr "Meer WordPress plugins door Mike Challis:"
-
-#: si-captcha.php:439
-msgid "Fast and Secure Contact Form"
-msgstr "Snel en veilig contact formulier"
-
-#: si-captcha.php:440
-msgid "SI CAPTCHA Anti-Spam"
-msgstr "SI CAPTCHA Anti-Spam"
-
-#: si-captcha.php:441
-msgid "Visitor Maps and Who's Online"
-msgstr "Bezoeker Locaties en Wie is online"
-
-#: si-captcha.php:451
+#: si-captcha.php:116
 msgid "All registered users"
-msgstr "Alle geregistreerde gebruikers"
+msgstr "Geregistreerde gebruikers"
 
-#: si-captcha.php:452
+#: si-captcha.php:117
 msgid "Edit posts"
-msgstr "Bewerk posts"
+msgstr "Bewerk Berichten"
 
-#: si-captcha.php:453
+#: si-captcha.php:118
 msgid "Publish Posts"
-msgstr "Publiceer bericht"
+msgstr "Berichten publiceren"
 
-#: si-captcha.php:454
+#: si-captcha.php:119
 msgid "Moderate Comments"
-msgstr "Bewerk commentaar"
+msgstr "Beheer reacties"
 
-#: si-captcha.php:455
+#: si-captcha.php:120
 msgid "Administer site"
-msgstr "Beheer site"
+msgstr "Beheer"
 
-#: si-captcha.php:473
+#: si-captcha.php:141
 msgid "ERROR: si-captcha.php plugin says GD image support not detected in PHP!"
-msgstr "FOUT: si-captcha.php plugin geeft aan dat GD afbeelding support niet werd gedetecteerd in PHP!"
+msgstr ""
+"FOUT: de plugin 'si-contact-form.php' meldt dat er de GD-"
+"afbeeldingsondersteuning niet gedetecteerd is in PHP."
 
-#: si-captcha.php:474
-msgid "Contact your web host and ask them why GD image support is not enabled for PHP."
-msgstr "Neem contact op met uw web host en vraag hen waarom GD afbeelding support niet geactiveerd is voor PHP."
+#: si-captcha.php:142
+msgid ""
+"Contact your web host and ask them why GD image support is not enabled for "
+"PHP."
+msgstr ""
+"Neem contact op met de webhoster en vraag hem waarom GD-"
+"afbeeldingsondersteuning in PHP niet ingeschakeld is."
 
-#: si-captcha.php:478
-msgid "ERROR: si-captcha.php plugin says imagepng function not detected in PHP!"
-msgstr "FOUT: si-captcha.php plugin geeft aan dat de imagepng functie niet werd gedetecteerd in PHP!"
+#: si-captcha.php:146
+msgid ""
+"ERROR: si-captcha.php plugin says imagepng function not detected in PHP!"
+msgstr ""
+"FOUT: si-captcha.php plugin zegt imagepng functie niet gedetecteerd in PHP!"
 
-#: si-captcha.php:479
-msgid "Contact your web host and ask them why imagepng function is not enabled for PHP."
-msgstr "Neem contact op met uw web host en vraag hen waarom imagepng niet geactiveerd is voor PHP."
+#: si-captcha.php:147
+msgid ""
+"Contact your web host and ask them why imagepng function is not enabled for "
+"PHP."
+msgstr ""
+"Neem contact op met de webhoster en vraag hem waarom de imagepng-functie "
+"niet ingeschakeld is in PHP."
 
-#: si-captcha.php:483
+#: si-captcha.php:151
 msgid "ERROR: si-captcha.php plugin says captcha_library not found."
-msgstr "FOUT: si-captcha.php plugin geeft aan dat de captcha_library niet kan worden gevonden."
+msgstr ""
+"FOUT: 'si-contact-form.php' van de plugin meldt: 'captcha_library' niet "
+"gevonden."
 
-#: si-captcha.php:545
+#: si-captcha.php:194 si-captcha.php:274 si-captcha.php:324 si-captcha.php:355
+#: si-captcha.php:388 si-captcha.php:422 si-captcha.php:457 si-captcha.php:488
+#: si-captcha.php:526 si-captcha.php:560
+msgid "CAPTCHA Code"
+msgstr "Captcha"
+
+#: si-captcha.php:228
 msgid "Submit Comment"
-msgstr "Verstuur commentaar"
+msgstr "Plaats reactie"
 
-#: si-captcha.php:741
-#: si-captcha.php:770
-#: si-captcha.php:799
-#: si-captcha.php:849
-#: si-captcha.php:989
-msgid "Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ."
-msgstr "Kon het CAPTCHA cookie niet lezen. Verzeker u ervan dat u cookies heeft ingeschakeld en dat deze niet worden geblokkeerd door uw browser instellingen. Of een andere plugin zorgt voor een conflict. Zie plugin FAQ."
-
-#: si-captcha.php:745
-#: si-captcha.php:774
-#: si-captcha.php:803
-#: si-captcha.php:982
-msgid "Please complete the CAPTCHA."
-msgstr "Voltooi de CAPTCHA a.u.b."
-
-#: si-captcha.php:757
-#: si-captcha.php:786
-#: si-captcha.php:816
-#: si-captcha.php:1001
-msgid "That CAPTCHA was incorrect. Make sure you have not disabled cookies."
-msgstr "Die CAPTCHA was niet correct. Zorg er voor dat u cookies niet uitgeschakeld heeft."
-
-#: si-captcha.php:770
-#: si-captcha.php:774
-#: si-captcha.php:786
-#: si-captcha.php:799
-#: si-captcha.php:803
-#: si-captcha.php:816
-#: si-captcha.php:849
-#: si-captcha.php:982
-#: si-captcha.php:989
-#: si-captcha.php:1001
+#: si-captcha.php:591 si-captcha.php:606 si-captcha.php:620 si-captcha.php:663
+#: si-captcha.php:689 si-captcha.php:700
 msgid "ERROR"
 msgstr "FOUT"
 
-#: si-captcha.php:791
-#: si-captcha.php:820
-#: si-captcha.php:878
-#: si-captcha.php:906
-msgid "Error: You did not enter a CAPTCHA phrase. Press your browser's back button and try again."
-msgstr "Fout: U heeft geen CAPTCHA ingevoerd. Klik op uw browser's terugknop en probeer het opnieuw."
+#: si-captcha.php:682
+msgid "<strong>ERROR</strong>: The username field is empty."
+msgstr "<strong>Foutmelding</strong>:  Het veld e-mailadres is leeg."
 
-#: si-captcha.php:806
-#: si-captcha.php:834
-#: si-captcha.php:893
-#: si-captcha.php:918
-msgid "Error: You entered in the wrong CAPTCHA phrase. Press your browser's back button and try again."
-msgstr "Fout: U heeft de verkeerde CAPTCHA ingevoerd. Klik op uw browser's terugknop en probeer het opnieuw."
+#: si-captcha.php:685
+msgid "<strong>ERROR</strong>: The password field is empty."
+msgstr "Wat is jouw wachtwoord?"
 
-#: si-captcha.php:935
+#: si-captcha.php:690 si-captcha.php:764 si-captcha.php:769
+msgid "Empty CAPTCHA"
+msgstr "lege CAPTCHA"
+
+#: si-captcha.php:708
+#, php-format
+msgid ""
+"<strong>ERROR</strong>: Invalid username. <a href=\"%s\" title=\"Password "
+"Lost and Found\">Lost your password</a>?"
+msgstr ""
+"<strong>FOUT:.</strong> Ongeldige gebruikersnaam <a href=\"%s\" title="
+"\"Password Lost and Found\">Wachtwoord vergeten</a> ?"
+
+#: si-captcha.php:716
+msgid "<strong>ERROR</strong>: Your account has been marked as a spammer."
+msgstr "<strong>Melding</strong>: Je account is gemarkeerd als spammer."
+
+#: si-captcha.php:722
+msgid "Site Suspended."
+msgstr "Site opgeschort."
+
+#: si-captcha.php:732
+#, php-format
+msgid ""
+"<strong>ERROR</strong>: Incorrect password. <a href=\"%s\" title=\"Password "
+"Lost and Found\">Lost your password</a>?"
+msgstr ""
+"<strong>Foutmelding</strong>: onjuist wachtwoord. <a href=“%s” "
+"title=“Password Lost and Found”>Wachtwoord vergeten</a>?"
+
+#: si-captcha.php:771
+msgid "Missing CAPTCHA token"
+msgstr "Ontbrekende CAPTCHA token"
+
+#: si-captcha.php:786
+msgid "Possible spam bot"
+msgstr "Mogelijk spam bot"
+
+#: si-captcha.php:789
+msgid "Wrong CAPTCHA"
+msgstr "Verkeerde captcha"
+
+#: si-captcha.php:792
+msgid "Unreadable CAPTCHA token file"
+msgstr "Onleesbare CAPTCHA token file"
+
+#: si-captcha.php:838
+msgid "Leave this field empty"
+msgstr "leeg laten"
+
+#: si-captcha.php:845 si-captcha.php:847
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+#: si-captcha.php:854 si-captcha.php:857
+msgid "Refresh"
+msgstr "Ververs"
+
+#: si-captcha.php:876
 msgid "Settings"
 msgstr "Instellingen"
 
-#: si-captcha.php:976
-msgid "<strong>ERROR</strong>: The username field is empty."
-msgstr "<strong>FOUT</strong>: De gebruikersnaam is niet ingevuld."
+#. Plugin Name of the plugin/theme
+msgid "SI CAPTCHA Anti-Spam - VEVIDA"
+msgstr "SI CAPTCHA Anti-Spam - VEVIDA"
 
-#: si-captcha.php:979
-msgid "<strong>ERROR</strong>: The password field is empty."
-msgstr "<strong>FOUT</strong>: Het wachtwoord is niet ingevuld."
+#. Plugin URI of the plugin/theme
+msgid "http://www.642weather.com/weather/scripts-wordpress-captcha.php"
+msgstr "http://www.642weather.com/weather/scripts-wordpress-captcha.php"
 
-#: si-captcha.php:1009
-#, php-format
-msgid "<strong>ERROR</strong>: Invalid username. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
-msgstr "<strong>FOUT</strong>: Onjuiste gebruikersnaam. <a href=\"%s\" title=\"Password Lost and Found\">Wachtwoord vergeten</a>?"
+#. Description of the plugin/theme
+msgid ""
+"Adds CAPTCHA anti-spam methods to WordPress forms for comments, "
+"registration, lost password, login, or all. This prevents spam from "
+"automated bots. WP, WPMU, and BuddyPress compatible. <a href=\"options-"
+"general.php?page=si-captcha-for-wordpress/si-captcha.php\">Settings</a>"
+msgstr ""
+"Voegt CAPTCHA anti-spam methoden om WordPress formulieren voor opmerkingen, "
+"registratie, verloren wachtwoord, login, of alles. Dit voorkomt dat spam "
+"bots. WP, WPMU en BuddyPress compatibel. <a href=\"options-general.php?"
+"page=si-captcha-for-wordpress/si-captcha.php\">Instellingen</a>"
 
-#: si-captcha.php:1018
-#, php-format
-msgid "<strong>ERROR</strong>: Incorrect password. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
-msgstr "<strong>FOUT</strong>: Onjuist wachtwoord. <a href=\"%s\" title=\"Password Lost and Found\">Wachtwoord vergeten</a>?"
+#. Author of the plugin/theme
+msgid "Mike Challis, VEVIDA"
+msgstr "Mike Challis, VEVIDA"
 
+#. Author URI of the plugin/theme
+msgid "http://www.vevida.nl */"
+msgstr "http://www.vevida.nl * /"

@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
         'si_captcha_perm_level' => (trim($_POST['si_captcha_perm_level']) != '' ) ? strip_tags(trim($_POST['si_captcha_perm_level'])) : $si_captcha_option_defaults['si_captcha_perm_level'], // use default if empty
         'si_captcha_comment' => (isset($_POST['si_captcha_comment']) ) ? 'true' : 'false',
         'si_captcha_comment_label_position' => (trim($_POST['si_captcha_comment_label_position']) != '' ) ? strip_tags(trim($_POST['si_captcha_comment_label_position'])) : $si_captcha_option_defaults['si_captcha_comment_label_position'], // use default if empty
+	 'si_captcha_disabled' => (isset($_POST['si_captcha_disabled']) ) ? 'true' : 'false',
         'si_captcha_login' => (isset($_POST['si_captcha_login']) ) ? 'true' : 'false',
         'si_captcha_register' => (isset($_POST['si_captcha_register']) ) ? 'true' : 'false',
         'si_captcha_lostpwd' => (isset($_POST['si_captcha_lostpwd']) ) ? 'true' : 'false',
@@ -33,17 +34,6 @@ if (isset($_POST['submit'])) {
         'si_captcha_captcha_small' => (isset($_POST['si_captcha_captcha_small']) ) ? 'true' : 'false',
         'si_captcha_honeypot_enable' => (isset($_POST['si_captcha_honeypot_enable']) ) ? 'true' : 'false',
         'si_captcha_aria_required' => (isset($_POST['si_captcha_aria_required']) ) ? 'true' : 'false',
-        'si_captcha_required_indicator' => strip_tags(trim($_POST['si_captcha_required_indicator'])),
-        'si_captcha_error_spambot' => strip_tags(trim($_POST['si_captcha_error_spambot'])),
-        'si_captcha_error_incorrect' => strip_tags(trim($_POST['si_captcha_error_incorrect'])),
-        'si_captcha_error_empty' => strip_tags(trim($_POST['si_captcha_error_empty'])),
-        'si_captcha_error_token' => strip_tags(trim($_POST['si_captcha_error_token'])),
-        'si_captcha_error_error' => strip_tags(trim($_POST['si_captcha_error_error'])),
-        'si_captcha_error_unreadable' => strip_tags(trim($_POST['si_captcha_error_unreadable'])),
-        'si_captcha_error_cookie' => strip_tags(trim($_POST['si_captcha_error_cookie'])),
-        'si_captcha_label_captcha' => strip_tags(trim($_POST['si_captcha_label_captcha'])),
-        'si_captcha_tooltip_captcha' => strip_tags(trim($_POST['si_captcha_tooltip_captcha'])),
-        'si_captcha_tooltip_refresh' => strip_tags(trim($_POST['si_captcha_tooltip_refresh'])),
     );
 
     // deal with quotes
@@ -105,7 +95,7 @@ if (isset($_POST['submit'])) {
     if ($wpmu == 1 && version_compare($wp_version, '3', '>=') && is_multisite() && is_super_admin())  // wp 3.0 +
         echo admin_url('ms-admin.php?page=si-captcha.php');
     else if ($wpmu == 1)
-        echo admin_url('wpmu-admin.php?page=si-captcha.php');
+        echo admin_url('options-general.php?page=si-captcha-for-wordpress/si-captcha.php');
     else
         echo admin_url('options-general.php?page=si-captcha-for-wordpress/si-captcha.php');
     ?>" method="post">
@@ -134,6 +124,10 @@ if (isset($_POST['submit'])) {
                 <tr>
                     <th scope="row" style="width: 75px;"><?php _e('CAPTCHA:', 'si-captcha') ?></th>
                     <td>
+
+			 <input name="si_captcha_disabled" id="si_captcha_disabled" type="checkbox" <?php if ($si_captcha_opt['si_captcha_disabled'] == 'true') echo ' checked="checked" '; ?> />
+                        <label for="si_captcha_disabled"><?php _e('Check to disable CAPTCHA.', 'si-captcha') ?></label>
+			 <br /><br />
 
                         <input name="si_captcha_login" id="si_captcha_login" type="checkbox" <?php if ($si_captcha_opt['si_captcha_login'] == 'true') echo ' checked="checked" '; ?> />
                         <label for="si_captcha_login"><?php _e('Enable CAPTCHA on the login form.', 'si-captcha') ?></label>
@@ -295,36 +289,7 @@ _e('Enable this setting and javascript will relocate the button.', 'si-captcha')
 
             </table>
 
-            <br />
            
-           <table cellspacing="2" cellpadding="5" class="form-table">
-		   		<tr>
-                    <th scope="row" style="width: 75px;"><?php echo __('Text Labels:', 'si-captcha'); ?></th>
-                    <td>
-
-
-                        <strong><?php _e('Change text labels:', 'si-captcha'); ?></strong>
-                        <a style="cursor:pointer;" title="<?php echo __('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_labels_tip');"><?php echo __('help', 'si-captcha'); ?></a>
-                        <div style="text-align:left; display:none" id="si_captcha_labels_tip">
-<?php echo __('Some people wanted to change the text labels. These fields can be filled in to override the standard text labels.', 'si-captcha'); ?>
-                        </div>
-                        <br />
-                        <label for="si_captcha_required_indicator"><?php echo __('Required', 'si-captcha'); ?></label><input name="si_captcha_required_indicator" id="si_captcha_required_indicator" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_required_indicator']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_spambot"><?php echo __('Possible spam bot', 'si-captcha'); ?></label><input name="si_captcha_error_spambot" id="si_captcha_error_spambot" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_spambot']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_incorrect"><?php echo __('Wrong CAPTCHA', 'si-captcha'); ?></label><input name="si_captcha_error_incorrect" id="si_captcha_error_incorrect" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_incorrect']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_empty"><?php echo __('Empty CAPTCHA', 'si-captcha'); ?></label><input name="si_captcha_error_empty" id="si_captcha_error_empty" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_empty']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_token"><?php echo __('Missing CAPTCHA token', 'si-captcha'); ?></label><input name="si_captcha_error_token" id="si_captcha_error_token" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_token']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_unreadable"><?php echo __('Unreadable CAPTCHA token', 'si-captcha'); ?></label><input name="si_captcha_error_unreadable" id="si_captcha_error_unreadable" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_unreadable']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_cookie"><?php echo __('Unreadable CAPTCHA cookie', 'si-captcha'); ?></label><input name="si_captcha_error_cookie" id="si_captcha_error_cookie" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_cookie']); ?>" size="50" /><br />
-                        <label for="si_captcha_error_error"><?php echo __('ERROR', 'si-captcha'); ?></label><input name="si_captcha_error_error" id="si_captcha_error_error" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_error']); ?>" size="50" /><br />
-                        <label for="si_captcha_label_captcha"><?php echo __('CAPTCHA Code', 'si-captcha'); ?></label><input name="si_captcha_label_captcha" id="si_captcha_label_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_label_captcha']); ?>" size="50" /><br />
-                        <label for="si_captcha_tooltip_captcha"><?php echo __('CAPTCHA Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_captcha" id="si_captcha_tooltip_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']); ?>" size="50" /><br />
-                        <label for="si_captcha_tooltip_refresh"><?php echo __('Refresh Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_refresh" id="si_captcha_tooltip_refresh" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']); ?>" size="50" />
-
-                    </td>
-                </tr>
-            </table>
-
         </fieldset>
 
         <p class="submit">

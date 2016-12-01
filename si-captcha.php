@@ -1,32 +1,15 @@
 <?php
 /*
-  Plugin Name: SI CAPTCHA Anti-Spam
+  Plugin Name: SI CAPTCHA Anti-Spam - VEVIDA
   Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
   Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="options-general.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a>
-  Version: 2.7.7.8
-  Author: Mike Challis
-  Author URI: http://www.642weather.com/weather/scripts.php
- */
+  Version: 1.0.6
+  Author: Mike Challis, VEVIDA
+  Author URI: http://www.vevida.nl */
  
  
 $si_captcha_version = '2.7.7.8';
 
-/*  Copyright (C) 2008-2016 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
 
 // settings get deleted when plugin is deleted from admin plugins page
 // this must be outside the class or it does not work
@@ -50,7 +33,7 @@ if (!class_exists('siCaptcha')) {
             if ($wpmu == 1 && version_compare($wp_version, '3', '>=') && is_multisite() && is_super_admin()) { // wp 3.0 +
                 add_submenu_page('ms-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
                 add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
-            } else if ($wpmu != 1) {
+            } else {
                 add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
             }
         }
@@ -65,7 +48,8 @@ if (!class_exists('siCaptcha')) {
                 'si_captcha_perm_level' => 'read',
                 'si_captcha_comment' => 'true',
                 'si_captcha_comment_label_position' => $default_position,
-                'si_captcha_login' => 'false',
+                'si_captcha_disabled' => 'false',
+		 'si_captcha_login' => 'false',
                 'si_captcha_register' => 'true',
                 'si_captcha_lostpwd' => 'true',
                 'si_captcha_rearrange' => 'true',
@@ -120,7 +104,7 @@ if (!class_exists('siCaptcha')) {
             
             $si_captcha_admin_path = str_replace('/captcha', '', $si_captcha_dir);
             if ($wpmu == 1)
-                $si_captcha_admin_path = 'si-captcha-for-wordpress';
+                $si_captcha_admin_path = WPMU_PLUGIN_DIR.'/si-captcha-for-wordpress';
             require_once($si_captcha_admin_path . '/si-captcha-admin.php');
         }
 
@@ -1091,7 +1075,7 @@ if (isset($si_image_captcha)) {
         else
             $si_captcha_dir = WP_CONTENT_DIR . '/mu-plugins/si-captcha-for-wordpress/captcha';
     }
-
+	
     $si_captcha_url = $si_image_captcha->get_captcha_url_si();
 
     // only used for the no-session captcha setting
@@ -1110,13 +1094,22 @@ if (isset($si_image_captcha)) {
 
     // si captcha admin options
     add_action('admin_menu', array(&$si_image_captcha, 'si_captcha_add_tabs'), 1);
-    add_action('admin_head', array(&$si_image_captcha, 'si_captcha_admin_head'), 1);
+   // add_action('admin_head', array(&$si_image_captcha, 'si_captcha_admin_head'), 1);
 
 	add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_css'));
     
 
     // adds "Settings" link to the plugin action page
     add_filter('plugin_action_links', array(&$si_image_captcha, 'si_captcha_plugin_action_links'), 10, 2);
+    
+    //var_dump($si_captcha_opt['si_captcha_disabled']);
+
+    //Disable all captcha elements if disabled in backend
+    if($si_captcha_opt['si_captcha_disabled'] == 'true')
+    {
+       return;
+    }
+    
 
     if ($si_captcha_opt['si_captcha_comment'] == 'true') {
         // for WP 3.0+
