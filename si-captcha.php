@@ -1,13 +1,13 @@
 <?php
 /*
-  Plugin Name: SI CAPTCHA Anti-Spam - VEVIDA
+  Plugin Name: VEVIDA CAPTCHA Anti-Spam - Based on SI Captcha
   Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
   Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="options-general.php?page=vevida-captcha/si-captcha.php">Settings</a>
   Version: 1.0.6
   Author: Mike Challis, VEVIDA
   Author URI: http://www.vevida.nl */
- 
- 
+
+
 $si_captcha_version = '2.7.7.8';
 
 
@@ -31,10 +31,10 @@ if (!class_exists('siCaptcha')) {
 
             // for WP 3.0+ ONLY!
             if ($wpmu == 1 && version_compare($wp_version, '3', '>=') && is_multisite() && is_super_admin()) { // wp 3.0 +
-                add_submenu_page('ms-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
-                add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
+                add_submenu_page('ms-admin.php', __('VEVIDA Captcha Options', 'si-captcha'), __('VEVIDA Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
+                add_options_page(__('VEVIDA Captcha Options', 'si-captcha'), __('VEVIDA Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
             } else {
-                add_options_page(__('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
+                add_options_page(__('VEVIDA Captcha Options', 'si-captcha'), __('VEVIDA Captcha Options', 'si-captcha'), 'manage_options', __FILE__, array(&$this, 'si_captcha_options_page'));
             }
         }
 
@@ -92,7 +92,7 @@ if (!class_exists('siCaptcha')) {
                 $si_captcha_opt[$key] = $this->si_stripslashes($val);
             }
 
-            
+
             if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)
                 $si_captcha_opt['si_captcha_login'] = 'false'; // disable captcha on xmlrpc connections
         }
@@ -101,10 +101,10 @@ if (!class_exists('siCaptcha')) {
 
         function si_captcha_options_page() {
             global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults, $si_captcha_version;
-            
+
             $si_captcha_admin_path = str_replace('/captcha', '', $si_captcha_dir);
             if ($wpmu == 1)
-                $si_captcha_admin_path = WPMU_PLUGIN_DIR.'/si-captcha-for-wordpress';
+                $si_captcha_admin_path = WPMU_PLUGIN_DIR.'/vevida-captcha';
             require_once($si_captcha_admin_path . '/si-captcha-admin.php');
         }
 
@@ -763,7 +763,7 @@ EOT;
             if (isset($_POST['captcha_code']) && empty($_POST['captcha_code']))
                 return ($si_captcha_opt['si_captcha_error_empty'] != '') ? $si_captcha_opt['si_captcha_error_empty'] : __('Empty CAPTCHA', 'si-captcha');
 
-            
+
             //captcha without sessions
             if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
                 return ($si_captcha_opt['si_captcha_error_empty'] != '') ? $si_captcha_opt['si_captcha_error_empty'] : __('Empty CAPTCHA', 'si-captcha');
@@ -793,8 +793,8 @@ EOT;
                     //$this->si_captcha_token_error();
                 }
             }
-             
-            
+
+
         }
 
 // end function si_captcha_validate_code
@@ -827,7 +827,7 @@ EOT;
             }
             $securimage_show_rf_url = $securimage_show_url . '&amp;prefix=';
             $securimage_show_url .= '&amp;prefix=' . $prefix;
-           
+
 
             $si_html = '';
 
@@ -847,7 +847,7 @@ EOT;
             $si_html .= ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']) : esc_attr(__('CAPTCHA', 'si-captcha'));
             $si_html .= '" />' . "\n";
             $si_html .= '    <input id="si_code_' . $form_id . '" name="si_code_' . $form_id . '" type="hidden"  value="' . $prefix . '" />' . "\n";
-            
+
 
             $si_html .= '    <div id="si_refresh_' . $form_id . '">' . "\n";
             $si_html .= '<a href="#" rel="nofollow" title="';
@@ -985,7 +985,7 @@ EOT;
         function si_captcha_login_head() {
             global $si_captcha_opt;
             wp_enqueue_style('mg_captcha', plugins_url('./style.min.css', __FILE__));
-             
+
             //TODO MDG; enqueue script toevoegen
             echo '<script type="text/javascript" src="' . plugins_url('vevida-captcha/captcha/si_captcha.js?ver=' . time()) . '"></script>' . "\n";
         }
@@ -1062,12 +1062,12 @@ if (isset($si_image_captcha)) {
 //    2  WordPress MU Optional Activation
 
     $wpmu = 0;
-	
+
 	if(strpos(dirname(__FILE__), MUPLUGINDIR) !== false)
 	{
 		$wpmu = 1;
 	}
-	
+
     $si_captcha_dir = WP_PLUGIN_DIR . '/vevida-captcha/captcha';
     if ($wpmu == 1) {
         if (defined('MUPLUGINDIR'))
@@ -1075,7 +1075,7 @@ if (isset($si_image_captcha)) {
         else
             $si_captcha_dir = WP_CONTENT_DIR . '/mu-plugins/vevida-captcha/captcha';
     }
-	
+
     $si_captcha_url = $si_image_captcha->get_captcha_url_si();
 
     // only used for the no-session captcha setting
@@ -1090,26 +1090,24 @@ if (isset($si_image_captcha)) {
     $si_image_captcha->si_captcha_get_options();
 
     add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_script'));
-    
+
 
     // si captcha admin options
     add_action('admin_menu', array(&$si_image_captcha, 'si_captcha_add_tabs'), 1);
    // add_action('admin_head', array(&$si_image_captcha, 'si_captcha_admin_head'), 1);
 
 	add_action('wp_footer', array(&$si_image_captcha, 'si_captcha_add_css'));
-    
+
 
     // adds "Settings" link to the plugin action page
     add_filter('plugin_action_links', array(&$si_image_captcha, 'si_captcha_plugin_action_links'), 10, 2);
-    
-    //var_dump($si_captcha_opt['si_captcha_disabled']);
 
     //Disable all captcha elements if disabled in backend
     if($si_captcha_opt['si_captcha_disabled'] == 'true')
     {
        return;
     }
-    
+
 
     if ($si_captcha_opt['si_captcha_comment'] == 'true') {
         // for WP 3.0+
