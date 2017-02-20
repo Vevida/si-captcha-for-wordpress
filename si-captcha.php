@@ -2,7 +2,7 @@
 /*
   Plugin Name: SI CAPTCHA Anti-Spam - VEVIDA
   Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
-  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="options-general.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a>
+  Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="options-general.php?page=vevida-captcha/si-captcha.php">Settings</a>
   Version: 1.0.6
   Author: Mike Challis, VEVIDA
   Author URI: http://www.vevida.nl */
@@ -873,7 +873,7 @@ EOT;
                 $this_plugin = plugin_basename(__FILE__);
 
             if ($file == $this_plugin) {
-                $settings_link = '<a href="options-general.php?page=si-captcha-for-wordpress/si-captcha.php">' . __('Settings', 'si-captcha') . '</a>';
+                $settings_link = '<a href="options-general.php?page=vevida-captcha/si-captcha.php">' . __('Settings', 'si-captcha') . '</a>';
                 array_unshift($links, $settings_link);
             }
             return $links;
@@ -886,7 +886,7 @@ EOT;
 
             if (function_exists('load_plugin_textdomain')) {
                 if ($wpmu == 1) {
-                    load_plugin_textdomain('si-captcha', false, dirname(plugin_basename(__FILE__)) . '/si-captcha-for-wordpress/languages');
+                    load_plugin_textdomain('si-captcha', false, dirname(plugin_basename(__FILE__)) . '/vevida-captcha/languages');
                 } else {
                     load_plugin_textdomain('si-captcha', false, dirname(plugin_basename(__FILE__)) . '/languages');
                 }
@@ -987,7 +987,7 @@ EOT;
             wp_enqueue_style('mg_captcha', plugins_url('./style.min.css', __FILE__));
              
             //TODO MDG; enqueue script toevoegen
-            echo '<script type="text/javascript" src="' . plugins_url('si-captcha-for-wordpress/captcha/si_captcha.js?ver=' . time()) . '"></script>' . "\n";
+            echo '<script type="text/javascript" src="' . plugins_url('vevida-captcha/captcha/si_captcha.js?ver=' . time()) . '"></script>' . "\n";
         }
 
         function si_captcha_add_css() {
@@ -1018,7 +1018,7 @@ EOT;
             $site_uri = parse_url(get_option('home'));
             $home_uri = parse_url(get_option('siteurl'));
 
-            $si_dir = '/si-captcha-for-wordpress/captcha';
+            $si_dir = '/vevida-captcha/captcha';
 
             $url = WP_PLUGIN_URL . $si_dir;
 
@@ -1068,12 +1068,12 @@ if (isset($si_image_captcha)) {
 		$wpmu = 1;
 	}
 	
-    $si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha';
+    $si_captcha_dir = WP_PLUGIN_DIR . '/vevida-captcha/captcha';
     if ($wpmu == 1) {
         if (defined('MUPLUGINDIR'))
-            $si_captcha_dir = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha';
+            $si_captcha_dir = MUPLUGINDIR . '/vevida-captcha/captcha';
         else
-            $si_captcha_dir = WP_CONTENT_DIR . '/mu-plugins/si-captcha-for-wordpress/captcha';
+            $si_captcha_dir = WP_CONTENT_DIR . '/mu-plugins/vevida-captcha/captcha';
     }
 	
     $si_captcha_url = $si_image_captcha->get_captcha_url_si();

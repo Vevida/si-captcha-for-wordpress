@@ -2,7 +2,7 @@
 /*
   SI CAPTCHA Anti-Spam
   http://www.642weather.com/weather/scripts-wordpress-captcha.php
-  Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
+  Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=vevida-captcha/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
 
   Author: Mike Challis
   http://www.642weather.com/weather/scripts.php
@@ -95,9 +95,9 @@ if (isset($_POST['submit'])) {
     if ($wpmu == 1 && version_compare($wp_version, '3', '>=') && is_multisite() && is_super_admin())  // wp 3.0 +
         echo admin_url('ms-admin.php?page=si-captcha.php');
     else if ($wpmu == 1)
-        echo admin_url('options-general.php?page=si-captcha-for-wordpress/si-captcha.php');
+        echo admin_url('options-general.php?page=vevida-captcha/si-captcha.php');
     else
-        echo admin_url('options-general.php?page=si-captcha-for-wordpress/si-captcha.php');
+        echo admin_url('options-general.php?page=vevida-captcha/si-captcha.php');
     ?>" method="post">
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="form_type" value="upload_options" />
